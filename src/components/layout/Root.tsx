@@ -1,13 +1,20 @@
-import * as React from "react";
-import styled from "../utils/styled";
+import React from "react";
+import PropTypes from "prop-types";
+
+import styled from "../../utils/styled";
 
 interface RootProps {
   className?: string;
+  children?: React.ReactNode;
 }
 
 const Root: React.FC<RootProps> = ({ children }) => (
   <Wrapper>{children}</Wrapper>
 );
+
+Root.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default Root;
 
