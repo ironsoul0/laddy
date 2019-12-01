@@ -19,17 +19,6 @@ const globals = css`
     position: relative;
     vertical-align: middle;
   }
-  figure {
-    margin: 2rem 0;
-  }
-  figcaption {
-    font-size: 80%;
-  }
-  table {
-    width: 100%;
-    font-size: 85%;
-    border-collapse: collapse;
-  }
 `;
 
 export default globals;

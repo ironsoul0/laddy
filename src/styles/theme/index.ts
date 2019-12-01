@@ -5,11 +5,12 @@ import brandColors from "../colors/brandColors";
 
 const theme: Theme = {
   colors: {
-    background: brandColors.gray5,
+    background: brandColors.gray,
     body: brandColors.gray75,
     headings: brandColors.black,
     black: brandColors.black,
     white: brandColors.white,
+    green: brandColors.green,
     borders: darken(0.05, brandColors.gray5),
     tableOdd: darken(0.025, brandColors.gray5),
     brand: brandColors.red,
@@ -21,11 +22,11 @@ const theme: Theme = {
   },
   fonts: {
     headings:
-      "'IBM Plex Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,  Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif",
+      "Lato, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,  Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif",
     body:
-      "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif",
+      "Lato, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif",
     monospace:
-      "'IBM Plex Mono', Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace, monospace"
+      "Lato, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace, monospace"
   },
   fontSizes: {
     h1: "2.441rem",

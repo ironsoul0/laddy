@@ -10,6 +10,7 @@ export interface Theme {
     brand: string;
     black: string;
     white: string;
+    green: string;
     attrs: {
       str: string;
       agi: string;
