@@ -7,7 +7,7 @@ interface ProblemsProps {
   range: string;
 }
 
-const Problems: React.FC<ProblemsProps> = ({ range }) => {
+const Ladders: React.FC<ProblemsProps> = ({ range }) => {
   return (
     <Container>
       <Heading>Problems</Heading>
@@ -32,7 +32,7 @@ const Problems: React.FC<ProblemsProps> = ({ range }) => {
   );
 };
 
-export default Problems;
+export default Ladders;
 
 const Container = styled.div`
   width: 100%;

@@ -8,6 +8,7 @@ import normalize from "./styles/normalize";
 import globals from "./styles/globals";
 
 import Problems from "./pages/problems";
+import Ladders from "./pages/ladders";
 
 const Routes: React.FC = () => (
   <Root>
@@ -19,6 +20,11 @@ const Routes: React.FC = () => (
           exact
           path="/"
           render={(): React.ReactNode => <Problems range="[1300, 1399]" />}
+        />
+        <Route
+          exact
+          path="/ladders"
+          render={(): React.ReactNode => <Ladders range="[1300, 1399]" />}
         />
         <Route render={(): React.ReactNode => <div>Miss</div>} />
       </Switch>
