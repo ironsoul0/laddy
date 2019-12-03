@@ -11,6 +11,7 @@ const theme: Theme = {
     black: brandColors.black,
     white: brandColors.white,
     green: brandColors.green,
+    yellow: brandColors.yellow,
     borders: darken(0.05, brandColors.gray5),
     tableOdd: darken(0.025, brandColors.gray5),
     brand: brandColors.red,

@@ -1,6 +1,10 @@
 import React from "react";
+import { RouterState } from "connected-react-router";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { ApplicationState } from "../../store/reducers";
 
-import Icon from "../data/Icon";
+import List from "../../components/icons/List";
 import list from "../../assets/list.svg";
 import exit from "../../assets/exit.svg";
 import logo from "../../assets/logo.svg";
@@ -8,27 +12,64 @@ import problems from "../../assets/problems.svg";
 import profile from "../../assets/profile.svg";
 import styled from "../../utils/styled";
 
-const Wrapper: React.FC = props => {
+interface PropsFromState {
+  router: RouterState;
+}
+
+const Wrapper: React.FC<PropsFromState> = props => {
+  const location = props.router.location.pathname;
+
   return (
     <Container>
       <Menu>
-        <Logo
-          href="https://brainex.co"
-          target="_blank"
-          rel="noopener noreferrer"
-        />
-        <div style={{ width: "100%" }}>
-          <Icon src={list} selected />
-          <Icon src={profile} />
+        <Logo to="/" />
+        <div style={{ width: "100%", textAlign: "center" }}>
+          <IconWrap isActive={location.includes("ladders")}>
+            <Icon to="/ladders">
+              <List />
+            </Icon>
+          </IconWrap>
+          <IconWrap isActive={location.includes("profile")}>
+            <Icon to="/profile">
+              <List />
+            </Icon>
+          </IconWrap>
         </div>
-        <Icon src={exit} />
+        <IconWrap>
+          <Icon to="/logout">
+            <List />
+          </Icon>
+        </IconWrap>
       </Menu>
       {props.children}
     </Container>
   );
 };
 
-const Logo = styled.a`
+const mapStateToProps = (state: ApplicationState) => ({
+  router: state.router
+});
+
+export default connect(mapStateToProps)(Wrapper);
+
+interface IconWrapProps {
+  isActive?: boolean;
+}
+
+const IconWrap = styled.div<IconWrapProps>`
+  display: block;
+
+  & svg {
+    stroke: ${props =>
+      props.isActive ? props.theme.colors.yellow : props.theme.colors.black};
+  }
+`;
+
+const Icon = styled(NavLink)`
+  width: 100%;
+`;
+
+const Logo = styled(NavLink)`
   width: 60px;
   height: 30px;
   background: url(${logo}) no-repeat center center;
@@ -67,5 +108,3 @@ const Container = styled.div`
     display: block;
   }
 `;
-
-export default Wrapper;

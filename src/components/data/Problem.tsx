@@ -52,7 +52,7 @@ const ProblemDesc = styled.p`
   margin: 10px 0;
   padding-left: 35px;
 
-  &:nth-child(1) {
+  &:nth-of-type(1) {
     width: 175px;
   }
 `;

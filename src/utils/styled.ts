@@ -11,6 +11,7 @@ export interface Theme {
     black: string;
     white: string;
     green: string;
+    yellow: string;
     attrs: {
       str: string;
       agi: string;

@@ -56,7 +56,7 @@ const ListItem = styled.li`
   font-size: 16px;
   list-style-type: none;
 
-  &:nth-child(1) {
+  &:nth-of-type(1) {
     width: 175px;
   }
 `;

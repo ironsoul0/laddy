@@ -6,6 +6,7 @@ const globals = css`
     overflow-x: hidden;
     overflow-y: scroll;
   }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -14,10 +15,17 @@ const globals = css`
       text-decoration: underline;
     }
   }
+
   img {
     max-width: 100%;
     position: relative;
     vertical-align: middle;
+  }
+
+  .active-icon {
+    & svg {
+      stroke: #f5cf67;
+    }
   }
 `;
 
