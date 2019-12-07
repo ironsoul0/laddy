@@ -26,7 +26,11 @@ const Routes: React.FC = () => (
           path="/ladders"
           render={(): React.ReactNode => <Ladders range="[1300, 1399]" />}
         />
-        <Route render={(): React.ReactNode => <div>Miss</div>} />
+        <Route
+          render={(): React.ReactNode => (
+            <h1 style={{ width: "100%" }}>Miss</h1>
+          )}
+        />
       </Switch>
     </Wrapper>
   </Root>

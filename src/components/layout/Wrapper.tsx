@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { ApplicationState } from "../../store/reducers";
 
 import List from "../../components/icons/List";
+import User from "../../components/icons/User";
+import Logout from "../../components/icons/Logout";
 import list from "../../assets/list.svg";
 import exit from "../../assets/exit.svg";
 import logo from "../../assets/logo.svg";
@@ -31,13 +33,13 @@ const Wrapper: React.FC<PropsFromState> = props => {
           </IconWrap>
           <IconWrap isActive={location.includes("profile")}>
             <Icon to="/profile">
-              <List />
+              <User />
             </Icon>
           </IconWrap>
         </div>
         <IconWrap>
           <Icon to="/logout">
-            <List />
+            <Logout />
           </Icon>
         </IconWrap>
       </Menu>
@@ -62,6 +64,10 @@ const IconWrap = styled.div<IconWrapProps>`
   & svg {
     stroke: ${props =>
       props.isActive ? props.theme.colors.yellow : props.theme.colors.black};
+  }
+
+  &:nth-of-type(1) {
+    margin-bottom: 15px;
   }
 `;
 
