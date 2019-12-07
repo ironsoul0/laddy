@@ -2,6 +2,7 @@ import React from "react";
 
 import styled from "../utils/styled";
 import Problem from "../components/data/Problem";
+import Heading from "../components/data/Heading";
 
 interface ProblemsProps {
   range: string;
@@ -9,7 +10,7 @@ interface ProblemsProps {
 
 const Problems: React.FC<ProblemsProps> = ({ range }) => {
   return (
-    <Container>
+    <>
       <Heading>Problems</Heading>
       <RatingRange>{range}</RatingRange>
       <ProblemsHeader>
@@ -18,31 +19,21 @@ const Problems: React.FC<ProblemsProps> = ({ range }) => {
       </ProblemsHeader>
       <Problem
         name="Kekocity"
-        difficulty={3}
+        difficulty="3"
         solved={true}
         link="https://codeforces.com/contest/1255/problem/E1"
       />
       <Problem
         name="Krauch's Adventure"
-        difficulty={4}
+        difficulty="4"
         solved={false}
         link="https://codeforces.com/contest/1255/problem/E1"
       />
-    </Container>
+    </>
   );
 };
 
 export default Problems;
-
-const Container = styled.div`
-  width: 100%;
-`;
-
-const Heading = styled.h1`
-  color: ${props => props.theme.colors.black};
-  font-size: 55px;
-  margin-bottom: 0;
-`;
 
 const RatingRange = styled.p`
   font-size: 17px;
@@ -55,9 +46,10 @@ const ListItem = styled.li`
   font-weight: 400;
   font-size: 16px;
   list-style-type: none;
+  width: 175px;
 
-  &:nth-of-type(1) {
-    width: 175px;
+  &:nth-of-last-type(1) {
+    width: 0px;
   }
 `;
 

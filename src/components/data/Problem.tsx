@@ -3,7 +3,7 @@ import styled from "../../utils/styled";
 
 interface ProblemProps {
   name: string;
-  difficulty: number;
+  difficulty: string;
   solved: boolean;
   link: string;
 }
@@ -51,8 +51,9 @@ const ProblemDesc = styled.p`
   font-size: 14px;
   margin: 10px 0;
   padding-left: 35px;
+  width: 175px;
 
-  &:nth-of-type(1) {
-    width: 175px;
+  &:nth-of-last-type(1) {
+    width: 0px;
   }
 `;

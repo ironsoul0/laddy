@@ -2,16 +2,12 @@ import React from "react";
 import { RouterState } from "connected-react-router";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { ApplicationState } from "../../store/reducers";
 
+import { ApplicationState } from "../../store/reducers";
 import List from "../../components/icons/List";
 import User from "../../components/icons/User";
 import Logout from "../../components/icons/Logout";
-import list from "../../assets/list.svg";
-import exit from "../../assets/exit.svg";
 import logo from "../../assets/logo.svg";
-import problems from "../../assets/problems.svg";
-import profile from "../../assets/profile.svg";
 import styled from "../../utils/styled";
 
 interface PropsFromState {
@@ -32,7 +28,7 @@ const Wrapper: React.FC<PropsFromState> = props => {
             </Icon>
           </IconWrap>
           <IconWrap isActive={location.includes("profile")}>
-            <Icon to="/profile">
+            <Icon to="/">
               <User />
             </Icon>
           </IconWrap>
@@ -43,7 +39,7 @@ const Wrapper: React.FC<PropsFromState> = props => {
           </Icon>
         </IconWrap>
       </Menu>
-      {props.children}
+      <Body>{props.children}</Body>
     </Container>
   );
 };
@@ -64,6 +60,7 @@ const IconWrap = styled.div<IconWrapProps>`
   & svg {
     stroke: ${props =>
       props.isActive ? props.theme.colors.yellow : props.theme.colors.black};
+    transition: stroke 0.2s ease-in-out;
   }
 
   &:nth-of-type(1) {
@@ -113,4 +110,8 @@ const Container = styled.div`
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
     display: block;
   }
+`;
+
+const Body = styled.div`
+  width: 100%;
 `;

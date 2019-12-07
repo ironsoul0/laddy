@@ -1,63 +1,88 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "../utils/styled";
-import Problem from "../components/data/Problem";
+import Heading from "../components/data/Heading";
 
-interface ProblemsProps {
-  range: string;
-}
+const Ladders: React.FC = () => {
+  const [isJoined, setJoined] = useState(true);
 
-const Ladders: React.FC<ProblemsProps> = ({ range }) => {
   return (
-    <Container>
-      <Heading>Problems</Heading>
-      <RatingRange>{range}</RatingRange>
+    <>
+      <Heading>Ladders</Heading>
+      <Nav>
+        <NavItem active={isJoined} onClick={() => setJoined(!isJoined)}>
+          Joined
+        </NavItem>
+        <NavItem active={!isJoined} onClick={() => setJoined(!isJoined)}>
+          All
+        </NavItem>
+        <Separator />
+      </Nav>
       <ProblemsHeader>
-        <ListItem>Problem name</ListItem>
-        <ListItem>Difficulty level</ListItem>
+        <ListItem>Rating range</ListItem>
+        <ListItem>Users count</ListItem>
+        <ListItem>Problems count</ListItem>
       </ProblemsHeader>
-      <Problem
-        name="Kekocity"
-        difficulty={3}
-        solved={true}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Krauch's Adventure"
-        difficulty={4}
-        solved={false}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-    </Container>
+    </>
   );
 };
 
 export default Ladders;
 
-const Container = styled.div`
+const Nav = styled.ul`
+  display: flex;
+  padding: 0;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  position: relative;
+`;
+
+interface NavItemProps {
+  active?: boolean;
+}
+
+const NavItem = styled.div<NavItemProps>`
+  font-weight: bold;
+  font-size: 20px;
+  list-style-type: none;
+  width: 85px;
+  padding-bottom: 7px;
+  z-index: 1;
+  text-align: center;
+  border-bottom: ${props =>
+    props.active
+      ? `2px solid ${props.theme.colors.yellow}`
+      : `2px solid #eaecef`};
+  color: ${props =>
+    props.active ? props.theme.colors.yellow : props.theme.colors.black};
+
+  &:nth-of-last-type(1) {
+    width: 0px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  transition: border-bottom-color 0.2s ease-in-out, color 0.2s ease-in-out;
+`;
+
+const Separator = styled.div`
   width: 100%;
-`;
-
-const Heading = styled.h1`
-  color: ${props => props.theme.colors.black};
-  font-size: 55px;
-  margin-bottom: 0;
-`;
-
-const RatingRange = styled.p`
-  font-size: 17px;
-  color: ${props => props.theme.colors.black};
-  margin-top: 10px;
-  margin-bottom: 50px;
+  height: 2px;
+  background-color: #eaecef;
+  margin-bottom: 40px;
+  position: absolute;
+  top: 30px;
 `;
 
 const ListItem = styled.li`
-  font-weight: 400;
   font-size: 16px;
   list-style-type: none;
+  width: 175px;
 
-  &:nth-of-type(1) {
-    width: 175px;
+  &:nth-of-last-type(1) {
+    width: 0px;
   }
 `;
 
