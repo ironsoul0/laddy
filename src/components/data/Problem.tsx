@@ -3,7 +3,7 @@ import styled from "../../utils/styled";
 
 interface ProblemProps {
   name: string;
-  difficulty: string;
+  difficulty: number;
   solved: boolean;
   link: string;
 }

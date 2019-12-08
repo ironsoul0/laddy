@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { Global } from "@emotion/core";
 
 import Root from "./components/layout/Root";
@@ -16,7 +16,9 @@ const Routes: React.FC = () => (
     <Global styles={globals} />
     <Wrapper>
       <Switch>
-        <Route exact path="/" render={(): React.ReactNode => <Ladders />} />
+        <Route exact path="/">
+          <Redirect to="/ladders" />
+        </Route>
         <Route
           exact
           path="/ladders"
@@ -24,7 +26,7 @@ const Routes: React.FC = () => (
         />
         <Route
           exact
-          path="/problems"
+          path="/problems/1"
           render={(): React.ReactNode => <Problems range="[1300, 1399]" />}
         />
         <Route

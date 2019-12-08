@@ -19,13 +19,13 @@ const Problems: React.FC<ProblemsProps> = ({ range }) => {
       </ProblemsHeader>
       <Problem
         name="Kekocity"
-        difficulty="3"
+        difficulty={3}
         solved={true}
         link="https://codeforces.com/contest/1255/problem/E1"
       />
       <Problem
         name="Krauch's Adventure"
-        difficulty="4"
+        difficulty={4}
         solved={false}
         link="https://codeforces.com/contest/1255/problem/E1"
       />

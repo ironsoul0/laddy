@@ -22,7 +22,11 @@ const Wrapper: React.FC<PropsFromState> = props => {
       <Menu>
         <Logo to="/" />
         <div style={{ width: "100%", textAlign: "center" }}>
-          <IconWrap isActive={location.includes("ladders")}>
+          <IconWrap
+            isActive={
+              location.includes("ladders") || location.includes("problems")
+            }
+          >
             <Icon to="/ladders">
               <List />
             </Icon>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import styled from "../utils/styled";
 import Heading from "../components/data/Heading";
+import Ladder from "../components/data/Ladder";
 
 const Ladders: React.FC = () => {
   const [isJoined, setJoined] = useState(true);
@@ -18,11 +19,14 @@ const Ladders: React.FC = () => {
         </NavItem>
         <Separator />
       </Nav>
-      <ProblemsHeader>
+      <LaddersHeader>
         <ListItem>Rating range</ListItem>
         <ListItem>Users count</ListItem>
         <ListItem>Problems count</ListItem>
-      </ProblemsHeader>
+      </LaddersHeader>
+      <Ladder range="< 1300" users={10901} problems={2413} ladderID={1} />
+      <Ladder range="< 1300" users={10901} problems={2413} ladderID={1} />
+      <Ladder range="< 1300" users={10901} problems={2413} ladderID={1} />
     </>
   );
 };
@@ -33,7 +37,7 @@ const Nav = styled.ul`
   display: flex;
   padding: 0;
   margin-top: 50px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   position: relative;
 `;
 
@@ -86,7 +90,7 @@ const ListItem = styled.li`
   }
 `;
 
-const ProblemsHeader = styled.ul`
+const LaddersHeader = styled.ul`
   display: flex;
   padding-left: 35px;
 `;
