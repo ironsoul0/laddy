@@ -22,12 +22,6 @@ const globals = css`
     position: relative;
     vertical-align: middle;
   }
-
-  .active-icon {
-    & svg {
-      stroke: #f5cf67;
-    }
-  }
 `;
 
 export default globals;

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 
+import Spinner from "../data/Spinner";
 import styled from "../../utils/styled";
 
 const Notification: React.FC = () => {
   const [shown, setShown] = useState(true);
 
   return (
-    <Container shown={shown} onClick={() => setShown(false)}>
-      <p>Kekocity</p>
+    <Container visible={shown} onClick={() => setShown(!setShown)}>
+      <Spinner size={18} color="black" />
+      <p>kekocity</p>
     </Container>
   );
 };
@@ -15,7 +17,7 @@ const Notification: React.FC = () => {
 export default Notification;
 
 interface ContainerProps {
-  shown: boolean;
+  visible: boolean;
 }
 
 const Container = styled.div<ContainerProps>`
@@ -30,6 +32,6 @@ const Container = styled.div<ContainerProps>`
   left: calc(50% - 95px);
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 2;
-  top: ${props => (props.shown ? "15px" : "-100px")};
+  top: ${props => (props.visible ? "15px" : "-100px")};
   transition: top 0.3s linear;
 `;

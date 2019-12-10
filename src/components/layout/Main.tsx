@@ -48,10 +48,6 @@ const mapStateToProps = (state: ApplicationState) => ({
 
 export default connect(mapStateToProps)(Main);
 
-interface IconProps {
-  active: boolean;
-}
-
 const Logo = styled(NavLink)`
   width: 60px;
   height: 30px;
