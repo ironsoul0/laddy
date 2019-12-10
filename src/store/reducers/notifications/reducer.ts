@@ -6,6 +6,12 @@ import {
   NotificationType
 } from "./types";
 
+// const initialState: NotificationsState = {
+//   visible: false,
+//   type: NotificationType.NONE,
+//   text: ""
+// };
+
 const initialState: NotificationsState = {
   visible: false,
   type: NotificationType.NONE,
@@ -17,9 +23,7 @@ const reducer: Reducer<NotificationsState> = (state = initialState, action) => {
     case actionTypes.HIDE_NOTIFICATION: {
       return {
         ...state,
-        visible: false,
-        type: NotificationType.NONE,
-        text: ""
+        visible: false
       };
     }
     case actionTypes.LOADING_NOTIFICATION: {
@@ -27,7 +31,7 @@ const reducer: Reducer<NotificationsState> = (state = initialState, action) => {
         ...state,
         visible: true,
         type: NotificationType.LOADING,
-        text: action.data || "Loading..."
+        text: action.payload || "Loading..."
       };
     }
     case actionTypes.SUCCESS_NOTIFICATION: {
@@ -35,15 +39,15 @@ const reducer: Reducer<NotificationsState> = (state = initialState, action) => {
         ...state,
         visible: true,
         type: NotificationType.SUCCESS,
-        text: action.data || "Success!"
+        text: action.payload || "Success!"
       };
     }
-    case actionTypes.WARNING_NOTIFICATION: {
+    case actionTypes.ERROR_NOTIFICATION: {
       return {
         ...state,
         visible: true,
-        type: NotificationType.WARNING,
-        text: action.data || "Error!"
+        type: NotificationType.ERROR,
+        text: action.payload || "Error!"
       };
     }
     default: {

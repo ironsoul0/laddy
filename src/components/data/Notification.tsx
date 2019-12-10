@@ -1,20 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
+import {
+  AiFillCheckCircle as SuccessIcon,
+  AiFillCloseCircle as ErrorIcon
+} from "react-icons/ai";
 
-import Spinner from "../data/Spinner";
+import { ApplicationState } from "../../store/reducers";
+import Spinner from "../icons/Spinner";
 import styled from "../../utils/styled";
+import {
+  NotificationsState,
+  NotificationType
+} from "../../store/reducers/notifications/types";
 
-const Notification: React.FC = () => {
-  const [shown, setShown] = useState(true);
+interface NotificationProps {
+  notifications: NotificationsState;
+}
+
+const Notification: React.FC<NotificationProps> = ({ notifications }) => {
+  const { visible, type, text } = notifications;
+
+  const icons = {
+    [NotificationType.LOADING]: <Spinner size={18} color="#178FFF" />,
+    [NotificationType.SUCCESS]: <SuccessIcon size={18} color="#53C41A" />,
+    [NotificationType.ERROR]: <ErrorIcon size={18} color="#F5212D" />,
+    [NotificationType.NONE]: null
+  };
 
   return (
-    <Container visible={shown} onClick={() => setShown(!setShown)}>
-      <Spinner size={18} color="black" />
-      <p>kekocity</p>
+    <Container visible={visible}>
+      {icons[type]}
+      <Text>{text}</Text>
     </Container>
   );
 };
 
-export default Notification;
+const mapStateToProps = (state: ApplicationState) => ({
+  notifications: state.notifications
+});
+
+export default connect(mapStateToProps)(Notification);
 
 interface ContainerProps {
   visible: boolean;
@@ -22,16 +47,22 @@ interface ContainerProps {
 
 const Container = styled.div<ContainerProps>`
   position: absolute;
-  width: 190px;
+  width: 150px;
   height: 40px;
   border-radius: 5px;
   background-color: ${props => props.theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
-  left: calc(50% - 95px);
+  left: calc(50% - 75px);
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 2;
   top: ${props => (props.visible ? "15px" : "-100px")};
   transition: top 0.3s linear;
+`;
+
+const Text = styled.p`
+  font-size: 15px;
+  margin-left: 9px;
+  opacity: 0.9;
 `;

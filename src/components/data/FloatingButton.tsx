@@ -5,11 +5,12 @@ import styled from "../../utils/styled";
 
 interface FloatingButtonProps {
   joined: boolean;
+  onClick: () => void;
 }
 
-const FloatingButton: React.FC<FloatingButtonProps> = ({ joined }) => {
+const FloatingButton: React.FC<FloatingButtonProps> = props => {
   return (
-    <Button joined={joined}>
+    <Button joined={props.joined} onClick={props.onClick}>
       <Plus />
     </Button>
   );
@@ -22,8 +23,8 @@ const Button = styled.button<FloatingButtonProps>`
     props.joined ? "rgba(246,99,108,0.8)" : "rgba(245, 207, 103, 0.9)"};
   box-shadow: ${props =>
     props.joined
-      ? "0px 10px 40px rgba(246, 99, 108, 0.8)"
-      : "0px 10px 40px rgba(249, 208, 95, 0.7)"};
+      ? "0px 10px 40px rgba(246, 99, 108, 0.6)"
+      : "0px 10px 40px rgba(249, 208, 95, 0.6)"};
   transform: ${props => (props.joined ? "rotate(45deg)" : "")};
   border: none;
   outline: none;

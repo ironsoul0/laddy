@@ -1,13 +1,13 @@
 export enum NotificationsActionTypes {
   HIDE_NOTIFICATION = "@@notifications/HIDE",
   SUCCESS_NOTIFICATION = "@@notifications/SUCCESS",
-  WARNING_NOTIFICATION = "@@notifications/WARNING",
+  ERROR_NOTIFICATION = "@@notifications/ERROR",
   LOADING_NOTIFICATION = "@@notifications/LOADING"
 }
 
 export enum NotificationType {
   SUCCESS = "success",
-  WARNING = "warning",
+  ERROR = "error",
   LOADING = "loading",
   NONE = "none"
 }
