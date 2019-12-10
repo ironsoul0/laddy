@@ -41,9 +41,9 @@ const Container = styled(NavLink)`
   display: flex;
   border-radius: 10px;
   margin-bottom: 10px;
-  text-decoration: none;
   background-color: ${props => props.theme.colors.white};
 
+  &,
   &:focus,
   &:hover,
   &:visited,

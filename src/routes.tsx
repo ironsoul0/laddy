@@ -3,18 +3,18 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { Global } from "@emotion/core";
 
 import Root from "./components/layout/Root";
-import Wrapper from "./components/layout/Wrapper";
+import Main from "./components/layout/Main";
 import normalize from "./styles/normalize";
 import globals from "./styles/globals";
 
-import Problems from "./pages/Problems";
-import Ladders from "./pages/Ladders";
+import Problems from "./pages/problems";
+import Ladders from "./pages/ladders";
 
 const Routes: React.FC = () => (
   <Root>
     <Global styles={normalize} />
     <Global styles={globals} />
-    <Wrapper>
+    <Main>
       <Switch>
         <Route exact path="/">
           <Redirect to="/ladders" />
@@ -35,7 +35,7 @@ const Routes: React.FC = () => (
           )}
         />
       </Switch>
-    </Wrapper>
+    </Main>
   </Root>
 );
 

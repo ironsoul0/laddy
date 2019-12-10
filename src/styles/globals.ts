@@ -5,6 +5,7 @@ const globals = css`
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    background-color: #f7f7f7;
   }
 
   a {

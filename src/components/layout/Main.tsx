@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { ApplicationState } from "../../store/reducers";
-import List from "../../components/icons/List";
-import User from "../../components/icons/User";
-import Logout from "../../components/icons/Logout";
+import List from "../icons/List";
+import User from "../icons/User";
+import Logout from "../icons/Logout";
 import logo from "../../assets/logo.svg";
 import styled from "../../utils/styled";
 
@@ -14,7 +14,7 @@ interface PropsFromState {
   router: RouterState;
 }
 
-const Wrapper: React.FC<PropsFromState> = props => {
+const Main: React.FC<PropsFromState> = props => {
   const location = props.router.location.pathname;
 
   return (
@@ -52,7 +52,7 @@ const mapStateToProps = (state: ApplicationState) => ({
   router: state.router
 });
 
-export default connect(mapStateToProps)(Wrapper);
+export default connect(mapStateToProps)(Main);
 
 interface IconWrapProps {
   isActive?: boolean;
@@ -106,6 +106,7 @@ const Container = styled.div`
   display: flex;
   max-width: ${props => props.theme.widths.lg};
   margin: 0 auto;
+  position: relative;
 
   @media screen and (max-width: ${props => props.theme.breakpoints.lg}) {
     padding: 0 30px;
@@ -118,4 +119,7 @@ const Container = styled.div`
 
 const Body = styled.div`
   width: 100%;
+  padding-bottom: 10px;
+  max-height: 100vh;
+  overflow-y: scroll;
 `;

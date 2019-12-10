@@ -3,6 +3,7 @@ import React from "react";
 import styled from "../utils/styled";
 import Problem from "../components/data/Problem";
 import Heading from "../components/data/Heading";
+import FloatingButton from "../components/data/FloatingButton";
 
 interface ProblemsProps {
   range: string;
@@ -29,6 +30,115 @@ const Problems: React.FC<ProblemsProps> = ({ range }) => {
         solved={false}
         link="https://codeforces.com/contest/1255/problem/E1"
       />
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />{" "}
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />{" "}
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />{" "}
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />{" "}
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />{" "}
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />{" "}
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />{" "}
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />{" "}
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <FloatingButton joined={true} />
     </>
   );
 };
