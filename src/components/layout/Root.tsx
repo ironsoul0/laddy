@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Notification from "../data/Notification";
 import styled from "../../utils/styled";
 
 interface RootProps {
@@ -8,9 +9,14 @@ interface RootProps {
   children?: React.ReactNode;
 }
 
-const Root: React.FC<RootProps> = ({ children }) => (
-  <Wrapper>{children}</Wrapper>
-);
+const Root: React.FC<RootProps> = ({ children }) => {
+  return (
+    <Wrapper>
+      <Notification />
+      {children}
+    </Wrapper>
+  );
+};
 
 Root.propTypes = {
   children: PropTypes.node.isRequired
@@ -23,6 +29,7 @@ const Wrapper = styled("div")`
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
+  position: relative;
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.body};
   font-family: ${props => props.theme.fonts.body};
