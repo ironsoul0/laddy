@@ -2,11 +2,14 @@ import React from "react";
 import { RouterState } from "connected-react-router";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import {
+  AiOutlineUnorderedList as List,
+  AiOutlineUser as User,
+  AiOutlineLogout as Logout
+} from "react-icons/ai";
 
+import MenuIcon from "../icons/MenuIcon";
 import { ApplicationState } from "../../store/reducers";
-import List from "../icons/List";
-import User from "../icons/User";
-import Logout from "../icons/Logout";
 import logo from "../../assets/logo.svg";
 import styled from "../../utils/styled";
 
@@ -16,32 +19,23 @@ interface PropsFromState {
 
 const Main: React.FC<PropsFromState> = props => {
   const location = props.router.location.pathname;
+  const isProfile = location.includes("profile");
 
   return (
     <Container>
       <Menu>
         <Logo to="/" />
         <div style={{ width: "100%", textAlign: "center" }}>
-          <IconWrap
-            isActive={
-              location.includes("ladders") || location.includes("problems")
-            }
-          >
-            <Icon to="/ladders">
-              <List />
-            </Icon>
-          </IconWrap>
-          <IconWrap isActive={location.includes("profile")}>
-            <Icon to="/">
-              <User />
-            </Icon>
-          </IconWrap>
+          <MenuIcon to="/ladders" active={!isProfile}>
+            <List />
+          </MenuIcon>
+          <MenuIcon to="/profile" active={isProfile}>
+            <User />
+          </MenuIcon>
         </div>
-        <IconWrap>
-          <Icon to="/logout">
-            <Logout />
-          </Icon>
-        </IconWrap>
+        <MenuIcon to="/logout">
+          <Logout />
+        </MenuIcon>
       </Menu>
       <Body>{props.children}</Body>
     </Container>
@@ -54,27 +48,9 @@ const mapStateToProps = (state: ApplicationState) => ({
 
 export default connect(mapStateToProps)(Main);
 
-interface IconWrapProps {
-  isActive?: boolean;
+interface IconProps {
+  active: boolean;
 }
-
-const IconWrap = styled.div<IconWrapProps>`
-  display: block;
-
-  & svg {
-    stroke: ${props =>
-      props.isActive ? props.theme.colors.yellow : props.theme.colors.black};
-    transition: stroke 0.2s ease-in-out;
-  }
-
-  &:nth-of-type(1) {
-    margin-bottom: 15px;
-  }
-`;
-
-const Icon = styled(NavLink)`
-  width: 100%;
-`;
 
 const Logo = styled(NavLink)`
   width: 60px;
