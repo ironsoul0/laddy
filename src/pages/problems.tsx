@@ -65,6 +65,78 @@ const Problems: React.FC<AllProps> = props => {
         solved={true}
         link="https://codeforces.com/contest/1255/problem/E1"
       />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Krauch's Adventure"
+        difficulty={4}
+        solved={false}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
+      <Problem
+        name="Kekocity"
+        difficulty={3}
+        solved={true}
+        link="https://codeforces.com/contest/1255/problem/E1"
+      />
       <FloatingButton joined={isJoined} onClick={handleClick} />
     </>
   );

@@ -17,15 +17,15 @@ interface NotificationProps {
   notifications: NotificationsState;
 }
 
+const icons = {
+  [NotificationType.LOADING]: <Spinner size={18} color="#178FFF" />,
+  [NotificationType.SUCCESS]: <SuccessIcon size={18} color="#53C41A" />,
+  [NotificationType.ERROR]: <ErrorIcon size={18} color="#F5212D" />,
+  [NotificationType.NONE]: null
+};
+
 const Notification: React.FC<NotificationProps> = ({ notifications }) => {
   const { visible, type, text } = notifications;
-
-  const icons = {
-    [NotificationType.LOADING]: <Spinner size={18} color="#178FFF" />,
-    [NotificationType.SUCCESS]: <SuccessIcon size={18} color="#53C41A" />,
-    [NotificationType.ERROR]: <ErrorIcon size={18} color="#F5212D" />,
-    [NotificationType.NONE]: null
-  };
 
   return (
     <Container visible={visible}>

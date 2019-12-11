@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Div100vh from "react-div-100vh";
 
 import Notification from "../data/Notification";
 import styled from "../../utils/styled";
@@ -24,11 +25,10 @@ Root.propTypes = {
 
 export default Root;
 
-const Wrapper = styled("div")`
+const Wrapper = styled(Div100vh)`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
   position: relative;
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.body};

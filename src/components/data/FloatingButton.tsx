@@ -45,4 +45,12 @@ const Button = styled.button<FloatingButtonProps>`
       props.joined ? "rgba(246,99,108,0.9)" : "rgba(245, 207, 103, 1.0)"};
     cursor: pointer;
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoints.lg}) {
+    right: 40px;
+  }
+
+  @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+    bottom: 70px;
+  }
 `;

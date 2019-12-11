@@ -38,7 +38,7 @@ const Container = styled.div<ContainerProps>`
   border-radius: 10px;
   margin-bottom: 10px;
   box-shadow: ${props =>
-    props.solved ? "0px 10px 40px rgba(183, 255, 157, 0.4)" : ""};
+    props.solved ? "0px 10px 40px rgba(183, 255, 157, 0.25)" : ""};
   background-color: ${props =>
     props.solved ? props.theme.colors.green : props.theme.colors.white};
 
