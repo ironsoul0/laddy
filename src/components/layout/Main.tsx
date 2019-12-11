@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { RouterState } from "connected-react-router";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   AiOutlineUnorderedList as List,
@@ -10,8 +9,8 @@ import {
 import Div100vh from "react-div-100vh";
 
 import MenuIcon from "../icons/MenuIcon";
+import Logo from "../icons/Logo";
 import { ApplicationState } from "../../store/reducers";
-import logo from "../../assets/logo.svg";
 import styled from "../../utils/styled";
 
 interface PropsFromState {
@@ -47,7 +46,11 @@ const Main: React.FC<PropsFromState> = props => {
   return (
     <Container>
       <Menu>
-        <Logo to="/" />
+        <LogoWrapper>
+          <MenuIcon to="/">
+            <Logo />
+          </MenuIcon>
+        </LogoWrapper>
         {width <= 576 ? mainLinks : <DesktopLinks>{mainLinks}</DesktopLinks>}
         <MenuIcon to="/logout">
           <Logout />
@@ -64,11 +67,7 @@ const mapStateToProps = (state: ApplicationState) => ({
 
 export default connect(mapStateToProps)(Main);
 
-const Logo = styled(NavLink)`
-  width: 60px;
-  height: 30px;
-  background: url(${logo}) no-repeat center center;
-
+const LogoWrapper = styled.div`
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
     display: none;
   }

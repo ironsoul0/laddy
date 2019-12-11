@@ -9,6 +9,7 @@ import globals from "./styles/globals";
 
 import Problems from "./pages/problems";
 import Ladders from "./pages/ladders";
+import Profile from "./pages/profile";
 
 const Routes: React.FC = () => (
   <Root>
@@ -19,11 +20,8 @@ const Routes: React.FC = () => (
         <Route exact path="/">
           <Redirect to="/ladders" />
         </Route>
-        <Route
-          exact
-          path="/ladders"
-          render={(): React.ReactNode => <Ladders />}
-        />
+        <Route exact path="/ladders" component={Ladders} />
+        <Route exact path="/profile" component={Profile} />
         <Route
           exact
           path="/problems/1"
