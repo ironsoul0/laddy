@@ -83,7 +83,7 @@ const Separator = styled.div`
 const ListItem = styled.li`
   font-size: 16px;
   list-style-type: none;
-  width: 125px;
+  width: 175px;
 
   &:nth-of-last-type(1) {
     width: 0px;

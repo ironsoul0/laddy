@@ -8,7 +8,7 @@ const Profile: React.FC = () => {
   return (
     <Container>
       <Heading style={{ margin: 0 }}>Profile</Heading>
-      <Input value="ironsoul" label="Login" disabled={false} password={false} />
+      {/* <Input value="ironsoul" label="Login" disabled={false} password={false} /> */}
       <Input
         value="timka2609@gmail.com"
         label="Email"

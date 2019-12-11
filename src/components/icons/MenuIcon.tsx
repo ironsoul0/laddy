@@ -26,4 +26,10 @@ const Container = styled(NavLink)<IconProps>`
   &:nth-of-type(1) {
     margin-bottom: 15px;
   }
+
+  @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
+    &:nth-of-type(1) {
+      margin-bottom: 0px;
+    }
+  }
 `;

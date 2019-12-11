@@ -1,4 +1,5 @@
 import React from "react";
+
 import styled from "../../utils/styled";
 
 interface ProblemProps {
@@ -52,6 +53,9 @@ const ProblemDesc = styled.p`
   margin: 10px 0;
   padding-left: 35px;
   width: 175px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 
   &:nth-of-last-type(1) {
     width: 0px;
