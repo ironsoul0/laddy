@@ -47,14 +47,14 @@ interface ContainerProps {
 
 const Container = styled.div<ContainerProps>`
   position: absolute;
-  width: 150px;
+  width: 180px;
   height: 40px;
   border-radius: 5px;
   background-color: ${props => props.theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
-  left: calc(50% - 75px);
+  left: calc(50% - 90px);
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 2;
   top: ${props => (props.visible ? "15px" : "-100px")};

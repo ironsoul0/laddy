@@ -67,7 +67,7 @@ const Menu = styled.div`
   align-items: center;
   padding: 20px 0px;
   width: 80px;
-  box-shadow: 0px 10px 40px #f2f2f2;
+  box-shadow: 0px 10px 15px #f2f2f2;
   margin-right: 60px;
 
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
@@ -108,6 +108,7 @@ const Body = styled.div`
 
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
     padding: 0 20px;
+    padding-bottom: 60px;
   }
 `;
 

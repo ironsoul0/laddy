@@ -57,7 +57,7 @@ const LadderDesc = styled.p`
   font-size: 14px;
   margin: 10px 0;
   padding-left: 35px;
-  width: 175px;
+  width: 125px;
 
   &:nth-of-last-type(1) {
     width: 0px;

@@ -30,7 +30,7 @@ const Problems: React.FC<AllProps> = props => {
     setTimeout(() => {
       props.showNotification(
         NotificationsActionTypes.SUCCESS_NOTIFICATION,
-        "Joined!"
+        "Check your email!"
       );
       setJoined(true);
     }, 2000);
@@ -44,7 +44,7 @@ const Problems: React.FC<AllProps> = props => {
       <Heading>Problems</Heading>
       <RatingRange>{props.range}</RatingRange>
       <ProblemsHeader>
-        <ListItem>Problem name</ListItem>
+        <ListItem>Problem</ListItem>
         <ListItem>Difficulty level</ListItem>
       </ProblemsHeader>
       <Problem

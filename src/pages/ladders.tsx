@@ -20,13 +20,13 @@ const Ladders: React.FC = () => {
         <Separator />
       </Nav>
       <LaddersHeader>
-        <ListItem>Rating range</ListItem>
-        <ListItem>Users count</ListItem>
-        <ListItem>Problems count</ListItem>
+        <ListItem>Rating</ListItem>
+        <ListItem>Users</ListItem>
+        <ListItem>Problems</ListItem>
       </LaddersHeader>
       <Ladder range="< 1300" users={10901} problems={2413} ladderID={1} />
-      <Ladder range="< 1300" users={10901} problems={2413} ladderID={1} />
-      <Ladder range="< 1300" users={10901} problems={2413} ladderID={1} />
+      <Ladder range="[1400, 1499]" users={10901} problems={2413} ladderID={1} />
+      <Ladder range="[1500, 1599]" users={10901} problems={2413} ladderID={1} />
     </>
   );
 };
@@ -83,7 +83,7 @@ const Separator = styled.div`
 const ListItem = styled.li`
   font-size: 16px;
   list-style-type: none;
-  width: 175px;
+  width: 125px;
 
   &:nth-of-last-type(1) {
     width: 0px;
