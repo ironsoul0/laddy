@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { RouterState } from "connected-react-router";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
@@ -19,21 +19,36 @@ interface PropsFromState {
 }
 
 const Main: React.FC<PropsFromState> = props => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  });
+
   const location = props.router.location.pathname;
   const isProfile = location.includes("profile");
+
+  const mainLinks = (
+    <>
+      <MenuIcon to="/ladders" active={!isProfile}>
+        <List />
+      </MenuIcon>
+      <MenuIcon to="/profile" active={isProfile}>
+        <User />
+      </MenuIcon>
+    </>
+  );
 
   return (
     <Container>
       <Menu>
         <Logo to="/" />
-        {/* <div style={{ width: "100%", textAlign: "center" }}> */}
-        <MenuIcon to="/ladders" active={!isProfile}>
-          <List />
-        </MenuIcon>
-        <MenuIcon to="/profile" active={isProfile}>
-          <User />
-        </MenuIcon>
-        {/* </div> */}
+        {width <= 576 ? mainLinks : <DesktopLinks>{mainLinks}</DesktopLinks>}
         <MenuIcon to="/logout">
           <Logout />
         </MenuIcon>
@@ -112,11 +127,7 @@ const Body = styled.div`
   }
 `;
 
-const IconsGroup = styled.div`
+const DesktopLinks = styled.div`
   width: 100%;
   text-align: center;
-
-  @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
-    display: none;
-  }
 `;
