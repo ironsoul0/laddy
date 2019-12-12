@@ -51,6 +51,6 @@ const Button = styled.button<FloatingButtonProps>`
   }
 
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
-    bottom: 70px;
+    bottom: 80px;
   }
 `;
