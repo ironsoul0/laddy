@@ -63,7 +63,6 @@ const Main: React.FC<PropsFromState> = props => {
           <Logout />
         </MenuIcon>
       </Menu>
-      {/* <Card content={["< 1300", 123]} fontSize={14} /> */}
       <Body>{props.children}</Body>
     </Container>
   );
@@ -117,6 +116,7 @@ const Container = styled(Div100vh)`
   max-width: ${props => props.theme.widths.lg};
   margin: 0 auto;
   position: relative;
+  overflow-y: scroll;
 
   @media screen and (max-width: ${props => props.theme.breakpoints.lg}) {
     padding: 0 30px;

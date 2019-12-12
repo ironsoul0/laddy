@@ -12,7 +12,7 @@ import Ladders from "./pages/ladders";
 import Profile from "./pages/profile";
 import Login from "./pages/login";
 
-const loggedIn = false;
+const loggedIn = true;
 
 const Routes: React.FC = () => (
   <Root>
