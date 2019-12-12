@@ -117,7 +117,6 @@ const Container = styled(Div100vh)`
   max-width: ${props => props.theme.widths.lg};
   margin: 0 auto;
   position: relative;
-  overflow-y: scroll;
 
   @media screen and (max-width: ${props => props.theme.breakpoints.lg}) {
     padding: 0 30px;
