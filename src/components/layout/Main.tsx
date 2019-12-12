@@ -30,14 +30,21 @@ const Main: React.FC<PropsFromState> = props => {
   });
 
   const location = props.router.location.pathname;
-  const isProfile = location.includes("profile");
 
   const mainLinks = (
     <>
-      <MenuIcon to="/ladders" active={!isProfile} label="Main">
+      <MenuIcon
+        to="/ladders"
+        active={location.includes("ladders")}
+        label="Main"
+      >
         <List />
       </MenuIcon>
-      <MenuIcon to="/profile" active={isProfile} label="Profile">
+      <MenuIcon
+        to="/profile"
+        active={location.includes("profile")}
+        label="Profile"
+      >
         <User />
       </MenuIcon>
     </>
@@ -56,6 +63,7 @@ const Main: React.FC<PropsFromState> = props => {
           <Logout />
         </MenuIcon>
       </Menu>
+      {/* <Card content={["< 1300", 123]} fontSize={14} /> */}
       <Body>{props.children}</Body>
     </Container>
   );
@@ -82,7 +90,7 @@ const Menu = styled.div`
   padding-top: 20px;
   padding-bottom: 10px;
   width: 80px;
-  box-shadow: 0px 0px 15px #f2f2f2;
+  box-shadow: 0px 10px 40px #f2f2f2;
   margin-right: 60px;
 
   &:hover span {
@@ -98,7 +106,7 @@ const Menu = styled.div`
     position: absolute;
     bottom: 0;
     top: unset;
-    z-index: 100;
+    z-index: 1;
     background-color: ${props => props.theme.colors.background};
   }
 `;

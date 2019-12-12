@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import Card from "./Card";
 import mixins from "../../styles/mixins";
 import styled from "../../utils/styled";
 
@@ -20,19 +21,12 @@ const Ladder: React.FC<LadderProps> = ({
   ladderID
 }) => {
   const content = complete ? (
-    <>
-      <LadderDesc>{range}</LadderDesc>
-      <LadderDesc>{complete}%</LadderDesc>
-    </>
+    <Card content={[range, `${complete}%`]} fontSize={14} />
   ) : (
-    <>
-      <LadderDesc>{range}</LadderDesc>
-      <LadderDesc>{users}</LadderDesc>
-      <LadderDesc>{problems}</LadderDesc>
-    </>
+    <Card content={[range, users!, problems!]} fontSize={14} />
   );
 
-  return <Container to={`/problems/${ladderID}`}>{content}</Container>;
+  return <Container to={`/ladders/${ladderID}`}>{content}</Container>;
 };
 
 export default Ladder;
@@ -44,15 +38,4 @@ const Container = styled(NavLink)`
   margin-bottom: 10px;
   background-color: ${props => props.theme.colors.white};
   ${mixins.dropDecoration};
-`;
-
-const LadderDesc = styled.p`
-  font-size: 14px;
-  margin: 10px 0;
-  padding-left: 35px;
-  width: 175px;
-
-  &:nth-of-last-type(1) {
-    width: 0px;
-  }
 `;

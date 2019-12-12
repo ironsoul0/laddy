@@ -24,14 +24,10 @@ const Routes: React.FC = () => (
         <Route exact path="/profile" component={Profile} />
         <Route
           exact
-          path="/problems/1"
+          path="/ladders/1"
           render={(): React.ReactNode => <Problems range="[1300, 1399]" />}
         />
-        <Route
-          render={(): React.ReactNode => (
-            <h1 style={{ width: "100%" }}>Miss</h1>
-          )}
-        />
+        <Redirect to="/" />
       </Switch>
     </Main>
   </Root>

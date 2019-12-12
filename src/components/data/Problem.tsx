@@ -1,5 +1,6 @@
 import React from "react";
 
+import Card from "./Card";
 import styled from "../../utils/styled";
 
 interface ProblemProps {
@@ -21,8 +22,7 @@ const Problem: React.FC<ProblemProps> = ({
 
   return (
     <Container solved={solved} onClick={openProblem}>
-      <ProblemDesc>{name}</ProblemDesc>
-      <ProblemDesc>{difficulty}</ProblemDesc>
+      <Card content={[name, difficulty]} fontSize={14} />
     </Container>
   );
 };
@@ -45,19 +45,5 @@ const Container = styled.div<ContainerProps>`
 
   &:hover {
     cursor: pointer;
-  }
-`;
-
-const ProblemDesc = styled.p`
-  font-size: 14px;
-  margin: 10px 0;
-  padding-left: 35px;
-  width: 175px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-
-  &:nth-of-last-type(1) {
-    width: 0px;
   }
 `;
