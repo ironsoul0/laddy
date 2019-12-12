@@ -19,10 +19,18 @@ const Nav: React.FC<NavProps> = ({
 }) => {
   return (
     <Container className={className}>
-      <NavItem active={firstIsActive} onClick={() => setFirstActive(true)}>
+      <NavItem
+        active={firstIsActive}
+        onClick={() => setFirstActive(true)}
+        className="nav-item"
+      >
         {firstTab}
       </NavItem>
-      <NavItem active={!firstIsActive} onClick={() => setFirstActive(false)}>
+      <NavItem
+        active={!firstIsActive}
+        onClick={() => setFirstActive(false)}
+        className="nav-item"
+      >
         {secondTab}
       </NavItem>
       <Separator />

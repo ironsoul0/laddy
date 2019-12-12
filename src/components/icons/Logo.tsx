@@ -1,8 +1,13 @@
 import React from "react";
 
-const Logo = () => (
+interface LogoProps {
+  className?: string;
+}
+
+const Logo: React.FC<LogoProps> = ({ className }) => (
   <svg
-    width="39"
+    className={className}
+    width="59"
     height="36"
     viewBox="0 0 82 75"
     fill="none"

@@ -10,26 +10,37 @@ import globals from "./styles/globals";
 import Problems from "./pages/problems";
 import Ladders from "./pages/ladders";
 import Profile from "./pages/profile";
+import Login from "./pages/login";
+
+const loggedIn = false;
 
 const Routes: React.FC = () => (
   <Root>
     <Global styles={normalize} />
     <Global styles={globals} />
-    <Main>
+    {loggedIn ? (
+      <Main>
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/ladders" />
+          </Route>
+          <Route exact path="/ladders" component={Ladders} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/login" component={Login} />
+          <Route
+            exact
+            path="/ladders/1"
+            render={(): React.ReactNode => <Problems range="[1300, 1399]" />}
+          />
+          <Redirect to="/" />
+        </Switch>
+      </Main>
+    ) : (
       <Switch>
-        <Route exact path="/">
-          <Redirect to="/ladders" />
-        </Route>
-        <Route exact path="/ladders" component={Ladders} />
-        <Route exact path="/profile" component={Profile} />
-        <Route
-          exact
-          path="/ladders/1"
-          render={(): React.ReactNode => <Problems range="[1300, 1399]" />}
-        />
+        <Route exact path="/" component={Login} />
         <Redirect to="/" />
       </Switch>
-    </Main>
+    )}
   </Root>
 );
 
