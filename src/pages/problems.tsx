@@ -30,7 +30,7 @@ const Problems: React.FC<AllProps> = props => {
     setTimeout(() => {
       props.showNotification(
         NotificationsActionTypes.SUCCESS_NOTIFICATION,
-        "Check your email!"
+        "Joined!"
       );
       setJoined(true);
     }, 2000);
