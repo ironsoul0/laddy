@@ -34,10 +34,10 @@ const Main: React.FC<PropsFromState> = props => {
 
   const mainLinks = (
     <>
-      <MenuIcon to="/ladders" active={!isProfile}>
+      <MenuIcon to="/ladders" active={!isProfile} label="Main">
         <List />
       </MenuIcon>
-      <MenuIcon to="/profile" active={isProfile}>
+      <MenuIcon to="/profile" active={isProfile} label="Profile">
         <User />
       </MenuIcon>
     </>
@@ -52,7 +52,7 @@ const Main: React.FC<PropsFromState> = props => {
           </MenuIcon>
         </LogoWrapper>
         {width <= 576 ? mainLinks : <DesktopLinks>{mainLinks}</DesktopLinks>}
-        <MenuIcon to="/logout">
+        <MenuIcon to="/logout" label="Logout">
           <Logout />
         </MenuIcon>
       </Menu>
@@ -79,10 +79,15 @@ const Menu = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0px;
+  padding-top: 20px;
+  padding-bottom: 10px;
   width: 80px;
-  box-shadow: 0px 10px 15px #f2f2f2;
+  box-shadow: 0px 0px 15px #f2f2f2;
   margin-right: 60px;
+
+  &:hover span {
+    opacity: 1;
+  }
 
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
     flex-direction: row;
@@ -122,7 +127,7 @@ const Body = styled.div`
 
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
     padding: 0 20px;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
   }
 `;
 

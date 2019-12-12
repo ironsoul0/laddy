@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "../../utils/styled";
+import mixins from "../../styles/mixins";
 
 interface InputProps {
   value: string;
@@ -45,9 +46,5 @@ const InputBox = styled.input`
   width: 280px;
   margin: 0 auto;
 
-  &,
-  &:focus,
-  &:hover {
-    outline: none;
-  }
+  ${mixins.dropDecoration};
 `;

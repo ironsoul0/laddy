@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import mixins from "../../styles/mixins";
 import styled from "../../utils/styled";
 
 interface LadderProps {
@@ -42,15 +43,7 @@ const Container = styled(NavLink)`
   border-radius: 10px;
   margin-bottom: 10px;
   background-color: ${props => props.theme.colors.white};
-
-  &,
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
+  ${mixins.dropDecoration};
 `;
 
 const LadderDesc = styled.p`
