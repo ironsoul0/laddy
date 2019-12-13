@@ -97,7 +97,9 @@ const MainLogo = styled(Logo)`
   margin-left: -10px;
 `;
 
-const FormWrapper = styled.div``;
+const FormWrapper = styled.div`
+  min-height: 600px;
+`;
 
 const IntroHeading = styled(Heading)`
   font-size: 38px;

@@ -26,7 +26,6 @@ const Routes: React.FC = () => (
           </Route>
           <Route exact path="/ladders" component={Ladders} />
           <Route exact path="/profile" component={Profile} />
-          <Route exact path="/login" component={Login} />
           <Route
             exact
             path="/ladders/1"
