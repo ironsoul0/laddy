@@ -76,7 +76,7 @@ export class AuthResolver {
   }
 
   @Mutation(() => Boolean)
-  async logout(@Ctx() ctx: MyContext): Promise<Boolean> {
+  async logout(@Ctx() ctx: MyContext): Promise<boolean> {
     return new Promise((res, rej) =>
       ctx.req.session!.destroy(err => {
         if (err) {
