@@ -145,10 +145,7 @@ const mapDispatchToProps = {
   hideNotification
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Problems);
+export default connect(null, mapDispatchToProps)(Problems);
 
 const RatingRange = styled.p`
   font-size: 17px;

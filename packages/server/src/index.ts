@@ -1,38 +1,20 @@
+import "dotenv/config";
 import "reflect-metadata";
-import { createConnection, getConnectionOptions } from "typeorm";
 import express from "express";
-import session from "express-session";
-import connectSqlite3 from "connect-sqlite3";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { AuthResolver } from "./resolvers/AuthResolver";
-import { BookResolver } from "./resolvers/BookResolver";
+import { createConnection, getConnectionOptions } from "typeorm";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
-// I like to use redis for this: https://github.com/tj/connect-redis
-const SQLiteStore = connectSqlite3(session);
+import { UserResolver } from "./resolvers/UserResolver";
 
-(async () => {
+const bootstrap = async () => {
   const app = express();
 
-  app.use(
-    session({
-      store: new SQLiteStore({
-        db: "database.sqlite",
-        concurrentDB: true
-      }),
-      name: "qid",
-      secret: process.env.SESSION_SECRET || "aslkdfjoiq12312",
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 1000 * 60 * 60 * 24 * 7 * 365 // 7 years
-      }
-    })
-  );
+  app.use(cors());
+  app.use(cookieParser());
 
-  // get options from ormconfig.js
   const dbOptions = await getConnectionOptions(
     process.env.NODE_ENV || "development"
   );
@@ -40,15 +22,18 @@ const SQLiteStore = connectSqlite3(session);
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [AuthResolver, BookResolver],
-      validate: false
+      resolvers: [UserResolver]
     }),
     context: ({ req, res }) => ({ req, res })
   });
 
-  apolloServer.applyMiddleware({ app, cors: false });
-  const port = process.env.PORT || 4000;
-  app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}/graphql`);
+  apolloServer.applyMiddleware({ app });
+
+  const PORT = process.env.PORT || 4000;
+
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is started on port ${PORT}`);
   });
-})();
+};
+
+bootstrap();
