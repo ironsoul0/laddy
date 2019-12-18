@@ -98,7 +98,7 @@ const MainLogo = styled(Logo)`
 `;
 
 const FormWrapper = styled.div`
-  min-height: 600px;
+  min-height: 500px;
 `;
 
 const IntroHeading = styled(Heading)`

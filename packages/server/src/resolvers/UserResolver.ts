@@ -4,12 +4,10 @@ import {
   Mutation,
   Arg,
   Ctx,
-  UseMiddleware,
-  Int
+  UseMiddleware
 } from "type-graphql";
 import { hash, compare } from "bcryptjs";
 import { verify } from "jsonwebtoken";
-import { getConnection } from "typeorm";
 
 import { LoginResponse } from "../graphql-types/LoginResponse";
 import { User } from "../entity/User";
@@ -20,8 +18,8 @@ import { isAuth } from "../middleware/isAuth";
 @Resolver()
 export class UserResolver {
   @Query(() => String)
-  hello() {
-    return "hi!";
+  ping() {
+    return "Pong!";
   }
 
   @Query(() => String)
@@ -39,7 +37,6 @@ export class UserResolver {
   @Query(() => User, { nullable: true })
   me(@Ctx() context: MyContext) {
     const authorization = context.req.headers["authorization"];
-
     if (!authorization) {
       return null;
     }
@@ -52,15 +49,6 @@ export class UserResolver {
       console.log(err);
       return null;
     }
-  }
-
-  @Mutation(() => Boolean)
-  async revokeRefreshTokensForUser(@Arg("userId", () => Int) userId: number) {
-    await getConnection()
-      .getRepository(User)
-      .increment({ id: userId }, "tokenVersion", 1);
-
-    return true;
   }
 
   @Mutation(() => LoginResponse)
