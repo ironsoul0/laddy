@@ -4,6 +4,7 @@ import { Global } from "@emotion/core";
 
 import Root from "./components/layout/Root";
 import Main from "./components/layout/Main";
+
 import normalize from "./styles/normalize";
 import globals from "./styles/globals";
 

@@ -1,33 +1,34 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
-  Column,
   BaseEntity,
+  Column,
   ManyToMany,
-  JoinTable
+  JoinTable,
+  PrimaryGeneratedColumn
 } from "typeorm";
 import { ObjectType, Field, Int } from "type-graphql";
 
 import { Ladder } from "./Ladder";
 
 @ObjectType()
-@Entity("users")
-export class User extends BaseEntity {
+@Entity("problems")
+export class Problem extends BaseEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
   @Field()
   @Column("text")
-  email: string;
+  url: string;
 
-  @Column("text")
-  password: string;
+  @Field(() => Int)
+  @Column()
+  difficulty: number;
 
   @Field(() => [Ladder])
   @ManyToMany(
     () => Ladder,
-    ladder => ladder.users
+    ladder => ladder.problems
   )
   @JoinTable()
   ladders: Ladder[];
