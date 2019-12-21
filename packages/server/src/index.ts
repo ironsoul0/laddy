@@ -8,10 +8,10 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 import { UserResolver } from "./resolvers/UserResolver";
+import { AuthResolver } from "./resolvers/AuthResolver";
 
 const bootstrap = async () => {
   const app = express();
-
   app.use(cors());
   app.use(cookieParser());
 
@@ -22,15 +22,13 @@ const bootstrap = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver]
+      resolvers: [UserResolver, AuthResolver]
     }),
     context: ({ req, res }) => ({ req, res })
   });
-
   apolloServer.applyMiddleware({ app });
 
   const PORT = process.env.PORT || 4000;
-
   app.listen(PORT, () => {
     console.log(`🚀 Server is started on port ${PORT}`);
   });
