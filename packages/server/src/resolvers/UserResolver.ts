@@ -64,8 +64,9 @@ export class UserResolver {
     try {
       await handleValidation.validate(handle);
       await passwordValidation.validate(password);
-      if (newPassword.length > 0)
+      if (newPassword.length > 0) {
         await passwordValidation.validate(newPassword);
+      }
     } catch (err) {
       throw err;
     }

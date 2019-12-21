@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 
 import { UserResolver } from "./resolvers/UserResolver";
 import { AuthResolver } from "./resolvers/AuthResolver";
+import { LadderResolver } from "./resolvers/LadderResolver";
 
 const bootstrap = async () => {
   const app = express();
@@ -22,7 +23,7 @@ const bootstrap = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver, AuthResolver]
+      resolvers: [UserResolver, AuthResolver, LadderResolver]
     }),
     context: ({ req, res }) => ({ req, res })
   });
