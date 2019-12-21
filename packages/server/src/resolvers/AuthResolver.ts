@@ -5,7 +5,7 @@ import { LoginResponse } from "../graphql-types/LoginResponse";
 import { User } from "../entity/User";
 import { createAccessToken } from "../utils/auth";
 import { doesHandleExist } from "../utils/codeforces";
-import { registerSchema } from "../yup/userSchema";
+import { registerSchema, loginSchema } from "../yup/userSchema";
 
 @Resolver()
 export class AuthResolver {
@@ -14,6 +14,12 @@ export class AuthResolver {
     @Arg("email") email: string,
     @Arg("password") password: string
   ): Promise<LoginResponse> {
+    try {
+      await loginSchema.validate({ email, password });
+    } catch (err) {
+      throw err;
+    }
+
     const user = await User.findOne({ where: { email } });
     if (!user) {
       throw new Error("Could not find user");
@@ -39,7 +45,7 @@ export class AuthResolver {
     try {
       await registerSchema.validate({ email, password, handle });
     } catch (err) {
-      throw new Error(err.message);
+      throw err;
     }
 
     const userAlreadyExists = await User.findOne({ where: { email } });
