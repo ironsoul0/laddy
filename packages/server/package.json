@@ -8,12 +8,14 @@
     "@types/express-session": "^1.15.16",
     "@types/jsonwebtoken": "^8.3.5",
     "@types/node": "^12.12.8",
+    "@types/yup": "^0.26.27",
     "nodemon": "^1.19.4",
     "ts-node": "8.5.2",
     "typescript": "3.7.2"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.9",
+    "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "connect-sqlite3": "^0.9.11",
     "cookie-parser": "^1.4.4",
@@ -25,7 +27,8 @@
     "reflect-metadata": "^0.1.10",
     "sqlite3": "^4.1.0",
     "type-graphql": "^0.17.5",
-    "typeorm": "0.2.20"
+    "typeorm": "0.2.20",
+    "yup": "^0.28.0"
   },
   "scripts": {
     "start": "nodemon --exec ts-node --files src/index.ts",
