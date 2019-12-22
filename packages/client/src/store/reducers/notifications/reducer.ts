@@ -6,12 +6,6 @@ import {
   NotificationType
 } from "./types";
 
-// const initialState: NotificationsState = {
-//   visible: false,
-//   type: NotificationType.NONE,
-//   text: ""
-// };
-
 const initialState: NotificationsState = {
   visible: false,
   type: NotificationType.NONE,

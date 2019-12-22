@@ -18,6 +18,10 @@ export class Problem extends BaseEntity {
   id: number;
 
   @Field()
+  @Column("text", { nullable: true })
+  name: string;
+
+  @Field()
   @Column("text")
   url: string;
 

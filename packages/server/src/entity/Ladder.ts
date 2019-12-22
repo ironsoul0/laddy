@@ -19,7 +19,7 @@ export class Ladder extends BaseEntity {
 
   @Field()
   @Column("text")
-  name: string;
+  rating: string;
 
   @Field(() => [User])
   @ManyToMany(
