@@ -2,12 +2,16 @@ import { MiddlewareFn } from "type-graphql";
 import { verify } from "jsonwebtoken";
 
 import { MyContext } from "../graphql-types/MyContext";
+import { User } from "../entity/User";
 
-export const isAuth: MiddlewareFn<MyContext> = ({ context }, next) => {
+export const isAuth: MiddlewareFn<MyContext> = async ({ context }, next) => {
   const authorization = context.req.headers["authorization"];
 
+  const invalidAuth = new Error("Not authenticated");
+  const invalidPayload = new Error("Invalid payload provided");
+
   if (!authorization) {
-    throw new Error("Not authenticated");
+    throw invalidAuth;
   }
 
   try {
@@ -16,7 +20,17 @@ export const isAuth: MiddlewareFn<MyContext> = ({ context }, next) => {
     context.payload = payload as any;
   } catch (err) {
     console.log(err);
-    throw new Error("Not authenticated");
+    throw invalidAuth;
+  }
+
+  if (typeof context.payload !== "object" || !context.payload.userID) {
+    throw invalidPayload;
+  }
+
+  const user = await User.findOne(context.payload.userID);
+
+  if (!user) {
+    throw invalidAuth;
   }
 
   return next();

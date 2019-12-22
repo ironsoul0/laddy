@@ -54,13 +54,9 @@ export class UserResolver {
     }
 
     const userID = payload?.userID;
-    const userInfo = await User.findOne(userID);
+    const userInfo = (await User.findOne(userID)) as User;
 
-    if (!userInfo) {
-      throw new Error("User with such ID does not exist");
-    }
-
-    const validPassword = await compare(password, userInfo?.password);
+    const validPassword = await compare(password, userInfo.password);
     if (!validPassword) {
       throw new Error("Wrong password");
     }
