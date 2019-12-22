@@ -11,6 +11,8 @@ import { UserResolver } from "./resolvers/UserResolver";
 import { AuthResolver } from "./resolvers/AuthResolver";
 import { LadderResolver } from "./resolvers/LadderResolver";
 
+import { _fillWithMockData } from "./utils/mock";
+
 const bootstrap = async () => {
   const app = express();
   app.use(cors());
@@ -20,6 +22,8 @@ const bootstrap = async () => {
     process.env.NODE_ENV || "development"
   );
   await createConnection({ ...dbOptions, name: "default" });
+
+  // await _fillWithMockData();
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
