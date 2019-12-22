@@ -9,6 +9,7 @@ import {
 import { ObjectType, Field, Int } from "type-graphql";
 
 import { Ladder } from "./Ladder";
+import { User } from "./User";
 
 @ObjectType()
 @Entity("problems")
@@ -36,4 +37,11 @@ export class Problem extends BaseEntity {
   )
   @JoinTable()
   ladders: Ladder[];
+
+  @Field(() => [User])
+  @ManyToMany(
+    () => User,
+    user => user.problems
+  )
+  users: User[];
 }

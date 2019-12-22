@@ -1,11 +1,4 @@
-import {
-  Resolver,
-  Query,
-  Ctx,
-  UseMiddleware,
-  Arg,
-  Mutation
-} from "type-graphql";
+import { Resolver, Ctx, UseMiddleware, Arg, Mutation } from "type-graphql";
 import { compare, hash } from "bcryptjs";
 
 import { MyContext } from "../graphql-types/MyContext";
@@ -40,17 +33,6 @@ export class UserResolver {
 
     await user.save();
     return true;
-  }
-
-  @Query(() => [Ladder])
-  @UseMiddleware(isAuth)
-  async getJoinedLadders(@Ctx() { payload }: MyContext) {
-    const userID = payload?.userID;
-    const userInfo = await User.findOne(userID, { relations: ["ladders"] });
-    if (!userInfo) {
-      throw new Error("User with such ID does not exist");
-    }
-    return userInfo.ladders;
   }
 
   @Mutation(() => Boolean)

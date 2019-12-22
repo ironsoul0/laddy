@@ -9,8 +9,11 @@ export class BasicLadderInfo {
   totalUsers: number;
 
   @Field()
-  name: string;
+  rating: string;
 
   @Field(() => Int)
   totalProblems: number;
+
+  @Field(() => Boolean)
+  joined: boolean;
 }
