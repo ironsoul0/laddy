@@ -38,17 +38,17 @@ export const _fillWithMockData = async () => {
   const problem1 = new Problem();
   problem1.difficulty = 1;
   problem1.name = "Problem 1";
-  problem1.url = "https://codeforces.com/contest/1260/problem/a";
+  problem1.endpoints = ["1268/A", "1269/C"];
 
   const problem2 = new Problem();
   problem2.difficulty = 2;
   problem2.name = "Problem 2";
-  problem2.url = "https://codeforces.com/contest/1260/problem/b";
+  problem2.endpoints = ["1268/B", "1269/D"];
 
   const problem3 = new Problem();
   problem3.difficulty = 3;
   problem3.name = "Problem 3";
-  problem3.url = "https://codeforces.com/contest/1260/problem/c";
+  problem3.endpoints = ["1268/C", "1269/E"];
 
   await problem1.save();
   await problem2.save();

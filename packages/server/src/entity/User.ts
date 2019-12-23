@@ -29,6 +29,9 @@ export class User extends BaseEntity {
   @Column("text")
   password: string;
 
+  @Column("bigint", { nullable: true })
+  lastCheckedSubmission?: number;
+
   @Field(() => [Ladder])
   @ManyToMany(
     () => Ladder,

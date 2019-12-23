@@ -1,7 +1,7 @@
 import { ObjectType, Field, Int } from "type-graphql";
 
 @ObjectType()
-export class BasicLadderInfo {
+export class LadderInfo {
   @Field(() => Int)
   id: number;
 

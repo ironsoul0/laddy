@@ -23,7 +23,7 @@ const bootstrap = async () => {
   );
   await createConnection({ ...dbOptions, name: "default" });
 
-  // await _fillWithMockData();
+  // process.env.DEVELOPMENT && (await _fillWithMockData());
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({

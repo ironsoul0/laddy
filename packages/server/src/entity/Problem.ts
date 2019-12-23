@@ -22,9 +22,9 @@ export class Problem extends BaseEntity {
   @Column("text", { nullable: true })
   name: string;
 
-  @Field()
-  @Column("text")
-  url: string;
+  @Field(() => [String])
+  @Column("simple-array")
+  endpoints: string[];
 
   @Field(() => Int)
   @Column()
