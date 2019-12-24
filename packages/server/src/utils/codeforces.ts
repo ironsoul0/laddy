@@ -36,9 +36,7 @@ export const updateSubmissions = async (user: User) => {
   const problems = await Problem.find();
   const { lastCheckedSubmission, handle } = user;
 
-  console.log(lastCheckedSubmission);
-
-  const limit = 10;
+  const limit = 25;
 
   let newProblemsExist = true;
   let offset = 1,
@@ -52,7 +50,6 @@ export const updateSubmissions = async (user: User) => {
       (lastCheckedSubmission ? `&count=${limit}` : "");
 
     const status = await axios.get(QUERY_URL);
-
     const submissions = status.data.result;
 
     if (submissions.length === 0) {

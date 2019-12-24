@@ -71,7 +71,12 @@ export class UserResolver {
       userInfo.password = hashed;
     }
 
-    userInfo.handle = handle;
+    if (userInfo.handle !== handle) {
+      userInfo.handle = handle;
+      userInfo.lastCheckedSubmission = null!;
+      userInfo.problems = [];
+    }
+
     await userInfo.save();
     return true;
   }
