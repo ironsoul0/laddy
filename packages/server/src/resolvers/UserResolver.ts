@@ -7,6 +7,7 @@ import { isAuth } from "../middleware/isAuth";
 import { Ladder } from "../entity/Ladder";
 import { handleValidation, passwordValidation } from "../yup/userSchema";
 import { doesHandleExist } from "../utils/codeforces";
+import { redis } from "../utils/redis";
 
 @Resolver()
 export class UserResolver {
@@ -79,5 +80,24 @@ export class UserResolver {
 
     await userInfo.save();
     return true;
+  }
+
+  @Mutation(() => Boolean)
+  async confirmUser(@Arg("token") token: string) {
+    const userID = await redis.get(token);
+    if (!userID) {
+      return false;
+    }
+
+    const id = parseInt(userID, 10);
+
+    try {
+      await User.update({ id }, { confirmed: true });
+      await redis.del(token);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
   }
 }

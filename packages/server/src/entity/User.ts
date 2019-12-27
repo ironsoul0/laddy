@@ -32,6 +32,9 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   lastCheckedSubmission?: number;
 
+  @Column("boolean", { default: false })
+  confirmed: boolean;
+
   @Field(() => [Ladder])
   @ManyToMany(
     () => Ladder,

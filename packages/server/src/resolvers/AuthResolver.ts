@@ -6,6 +6,7 @@ import { User } from "../entity/User";
 import { createAccessToken } from "../utils/auth";
 import { doesHandleExist } from "../utils/codeforces";
 import { registerSchema, loginSchema } from "../yup/userSchema";
+import { sendConfirmationEmail } from "../utils/sendConfirmationEmail";
 
 @Resolver()
 export class AuthResolver {
@@ -30,6 +31,10 @@ export class AuthResolver {
       throw new Error("Wrong password");
     }
 
+    if (!user.confirmed) {
+      throw new Error("Not confirmed");
+    }
+
     return {
       accessToken: createAccessToken(user),
       user
@@ -50,6 +55,13 @@ export class AuthResolver {
 
     const userAlreadyExists = await User.findOne({ where: { email } });
     if (userAlreadyExists) {
+      const { id, confirmed } = userAlreadyExists;
+
+      if (!confirmed) {
+        await sendConfirmationEmail(email, id);
+        return true;
+      }
+
       throw new Error("User already exists");
     }
 
@@ -60,11 +72,12 @@ export class AuthResolver {
 
     const hashedPassword = await hash(password, 12);
     try {
-      await User.insert({
+      const user = await User.create({
         email,
         password: hashedPassword,
         handle
-      });
+      }).save();
+      await sendConfirmationEmail(email, user.id);
     } catch (err) {
       console.log(err);
       return false;
