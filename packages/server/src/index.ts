@@ -12,7 +12,6 @@ import { AuthResolver } from "./resolvers/AuthResolver";
 import { LadderResolver } from "./resolvers/LadderResolver";
 
 import { _fillWithMockData } from "./utils/mock";
-import { sendConfirmationEmail as _sendEmail } from "./utils/sendConfirmationEmail";
 
 const bootstrap = async () => {
   const app = express();

@@ -8,6 +8,7 @@ interface InputProps {
   disabled: boolean;
   password: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  id: string;
   value?: string;
   placeholder?: string;
   error?: boolean;
@@ -22,12 +23,14 @@ const Input: React.FC<InputProps> = ({
   onChange,
   placeholder,
   error,
-  success
+  success,
+  id
 }) => {
   return (
     <Container>
       <Label>{label}</Label>
       <InputBox
+        id={id}
         onChange={onChange}
         disabled={disabled}
         value={value}

@@ -33,14 +33,11 @@ const LoginForm = () => {
       {props => {
         const {
           values,
-          touched,
           errors,
           initialValues,
           isSubmitting,
           handleChange,
-          handleBlur,
-          handleSubmit,
-          handleReset
+          handleSubmit
         } = props;
 
         const hasChanged =
@@ -50,21 +47,25 @@ const LoginForm = () => {
         return (
           <form onSubmit={handleSubmit}>
             <Input
-              placeholder="snow@email.com"
+              id="email"
+              placeholder="laddy@app.com"
               label="Email"
               disabled={false}
               password={false}
-              error={errors.email ? true : false}
+              error={values.email !== initialValues.email && !!errors.email}
               success={values.email !== initialValues.email && !errors.email}
               onChange={handleChange}
               value={values.email}
             />
             <Input
-              placeholder="shhh..."
+              id="password"
+              placeholder="Shhh..."
               label="Password"
               disabled={false}
               password={true}
-              error={errors.password ? true : false}
+              error={
+                values.password !== initialValues.password && !!errors.password
+              }
               success={
                 values.password !== initialValues.password && !errors.password
               }
@@ -81,40 +82,114 @@ const LoginForm = () => {
   );
 };
 
-const RegisterForm = LoginForm;
+const RegisterForm = () => {
+  return (
+    <Formik
+      initialValues={{
+        email: "",
+        handle: "",
+        password: "",
+        confirmPassword: ""
+      }}
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email()
+          .required(),
+        handle: Yup.string().required(),
+        password: Yup.string().required(),
+        confirmPassword: Yup.string().required()
+      })}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 1000);
+      }}
+    >
+      {props => {
+        const {
+          values,
+          errors,
+          initialValues,
+          isSubmitting,
+          handleChange,
+          handleSubmit
+        } = props;
 
-// const RegisterForm = () => {
-//   return (
-//     <form>
-//       <Input
-//         value="timka2609@gmail.com"
-//         label="Email"
-//         disabled={false}
-//         password={false}
-//       />
-//       <Input
-//         value="ironsoul"
-//         label="Codeforces Handle"
-//         disabled={false}
-//         password={false}
-//       />
-//       <Input
-//         value="kekocity"
-//         label="Password"
-//         disabled={false}
-//         password={true}
-//       />
-//       <Input
-//         value="kekocity"
-//         label="Confirm Password"
-//         disabled={false}
-//         password={true}
-//         success
-//       />
-//       <FormButton>Register</FormButton>
-//     </form>
-//   );
-// };
+        const hasChanged =
+          JSON.stringify(values) !== JSON.stringify(initialValues);
+        const hasErrors =
+          Object.keys(errors).length > 0 ||
+          values.password !== values.confirmPassword;
+
+        return (
+          <form onSubmit={handleSubmit}>
+            <Input
+              id="email"
+              placeholder="laddy@app.com"
+              label="Email"
+              disabled={false}
+              password={false}
+              error={values.email !== initialValues.email && !!errors.email}
+              success={values.email !== initialValues.email && !errors.email}
+              onChange={handleChange}
+              value={values.email}
+            />
+            <Input
+              id="handle"
+              placeholder="laddy"
+              label="Handle"
+              disabled={false}
+              password={false}
+              error={values.handle !== initialValues.handle && !!errors.handle}
+              success={values.handle !== initialValues.handle && !errors.handle}
+              onChange={handleChange}
+              value={values.handle}
+            />
+            <Input
+              id="password"
+              placeholder="Shhh..."
+              label="Password"
+              disabled={false}
+              password={true}
+              error={
+                values.password !== initialValues.password && !!errors.password
+              }
+              success={
+                values.password !== initialValues.password && !errors.password
+              }
+              onChange={handleChange}
+              value={values.password}
+            />
+            <Input
+              id="confirmPassword"
+              placeholder="Shhh..."
+              label="Confirm Password"
+              disabled={false}
+              password={true}
+              error={
+                (values.confirmPassword !== initialValues.confirmPassword &&
+                  !!errors.confirmPassword) ||
+                (values.confirmPassword.length > 0 &&
+                  values.password !== values.confirmPassword)
+              }
+              success={
+                values.confirmPassword !== initialValues.confirmPassword &&
+                !errors.confirmPassword &&
+                values.password === values.confirmPassword
+              }
+              onChange={handleChange}
+              value={values.confirmPassword}
+            />
+            <FormButton disabled={!hasChanged || hasErrors || isSubmitting}>
+              Register
+            </FormButton>
+          </form>
+        );
+      }}
+    </Formik>
+  );
+};
 
 const Login: React.FC = () => {
   const [isLogin, setLogin] = useState(true);
@@ -131,7 +206,7 @@ const Login: React.FC = () => {
             firstIsActive={isLogin}
             setFirstActive={setLogin}
           />
-          {!isLogin ? <RegisterForm /> : <LoginForm />}
+          {isLogin ? <LoginForm /> : <RegisterForm />}
         </FormWrapper>
       </Centered>
     </Body>

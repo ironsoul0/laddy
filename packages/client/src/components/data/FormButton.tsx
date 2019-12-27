@@ -6,10 +6,10 @@ interface FormButtonProps {
   disabled?: boolean;
 }
 
-const FormButton: React.FC<FormButtonProps> = ({ disabled }) => {
+const FormButton: React.FC<FormButtonProps> = props => {
   return (
-    <Container disabled={disabled} type="submit">
-      Submit
+    <Container disabled={props.disabled} type="submit">
+      {props.children}
     </Container>
   );
 };

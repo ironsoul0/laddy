@@ -1,4 +1,4 @@
-import { Resolver, Query, Arg, UseMiddleware, Ctx } from "type-graphql";
+import { Resolver, Query, Arg, UseMiddleware, Ctx, Int } from "type-graphql";
 
 import { Ladder } from "../entity/Ladder";
 import { User } from "../entity/User";
@@ -34,7 +34,7 @@ export class LadderResolver {
   @Query(() => [ProblemInfo])
   @UseMiddleware(isAuth)
   async getLadderProblems(
-    @Arg("ladderID") ladderID: number,
+    @Arg("ladderID", () => Int) ladderID: number,
     @Ctx() { payload }: MyContext
   ) {
     const ladder = await Ladder.findOne(ladderID, { relations: ["problems"] });
