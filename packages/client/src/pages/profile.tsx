@@ -3,13 +3,13 @@ import React from "react";
 import Centered from "../components/data/Centered";
 import FormButton from "../components/data/FormButton";
 import Heading from "../components/data/Heading";
-import Input from "../components/data/Input";
+// import Input from "../components/data/Input";
 
 const Profile: React.FC = () => {
   return (
     <Centered>
       <Heading style={{ margin: 0 }}>Profile</Heading>
-      <Input
+      {/* <Input
         value="timka2609@gmail.com"
         label="Email"
         disabled={true}
@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
         label="Current Password"
         disabled={false}
         password={true}
-      />
+      /> */}
       <FormButton>Update</FormButton>
     </Centered>
   );

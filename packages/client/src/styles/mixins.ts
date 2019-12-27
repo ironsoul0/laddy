@@ -9,6 +9,7 @@ const mixins = {
     &:link,
     &:active {
       text-decoration: none;
+      outline: none;
     }
   `
 };

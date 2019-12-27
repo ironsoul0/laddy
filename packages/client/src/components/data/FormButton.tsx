@@ -1,6 +1,20 @@
+import React from "react";
+
 import styled from "../../utils/styled";
 
-const FormButton = styled.button`
+interface FormButtonProps {
+  disabled?: boolean;
+}
+
+const FormButton: React.FC<FormButtonProps> = ({ disabled }) => {
+  return (
+    <Container disabled={disabled} type="submit">
+      Submit
+    </Container>
+  );
+};
+
+const Container = styled.button`
   color: ${props => props.theme.colors.black};
   font-size: 18px;
   border: none;
@@ -9,6 +23,11 @@ const FormButton = styled.button`
   border-radius: 10px;
   padding: 14px 0;
   margin-top: 30px;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+  }
 
   &:hover,
   &:focus,

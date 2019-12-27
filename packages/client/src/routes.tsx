@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Global } from "@emotion/core";
+import { connect } from "react-redux";
 
 import Root from "./components/layout/Root";
 import Main from "./components/layout/Main";
@@ -13,13 +14,18 @@ import Ladders from "./pages/ladders";
 import Profile from "./pages/profile";
 import Login from "./pages/login";
 
-const loggedIn = true;
+import { ApplicationState } from "./store/reducers";
+import { UserState } from "./store/reducers/user/types";
 
-const Routes: React.FC = () => (
+interface RoutesProps {
+  user: UserState;
+}
+
+const Routes: React.FC<RoutesProps> = ({ user }) => (
   <Root>
     <Global styles={normalize} />
     <Global styles={globals} />
-    {loggedIn ? (
+    {user.loggedIn ? (
       <Main>
         <Switch>
           <Route exact path="/">
@@ -44,4 +50,8 @@ const Routes: React.FC = () => (
   </Root>
 );
 
-export default Routes;
+const mapStateToProps = (state: ApplicationState) => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(Routes);
