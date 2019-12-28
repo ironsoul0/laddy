@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 
 import FormButton from "../components/data/FormButton";
 import Centered from "../components/data/Centered";
@@ -9,6 +11,12 @@ import Input from "../components/data/Input";
 import Nav from "../components/data/Nav";
 import styled from "../utils/styled";
 import Logo from "../components/icons/Logo";
+
+const TEST = gql`
+  query {
+    ping
+  }
+`;
 
 const LoginForm = () => {
   return (
