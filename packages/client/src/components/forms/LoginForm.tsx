@@ -1,11 +1,44 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { gql } from "apollo-boost";
+import { useMutation } from "react-apollo";
+import { connect } from "react-redux";
 
 import Input from "../data/Input";
 import FormButton from "../data/FormButton";
+import withNotification, {
+  WithNoficationProps
+} from "../hocs/withNotification";
+import { login } from "../../store/reducers/user/actions";
 
-const LoginForm = () => {
+const LOGIN = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      accessToken
+    }
+  }
+`;
+
+interface PropsFromDispatch {
+  login: typeof login;
+}
+
+type AllProps = WithNoficationProps & PropsFromDispatch;
+
+const LoginForm: React.FC<AllProps> = props => {
+  const [loginMutation] = useMutation(LOGIN, {
+    update(_, { data }) {
+      const { accessToken } = data.login;
+      props.showSuccess();
+      localStorage.setItem("token", accessToken);
+      props.login(accessToken);
+    },
+    onError(err) {
+      props.showError(err.graphQLErrors[0].message);
+    }
+  });
+
   return (
     <Formik
       initialValues={{
@@ -18,11 +51,11 @@ const LoginForm = () => {
           .required(),
         password: Yup.string().required()
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 1000);
+      onSubmit={async values => {
+        props.showLoading();
+        await loginMutation({
+          variables: { email: values.email, password: values.password }
+        });
       }}
     >
       {props => {
@@ -77,4 +110,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default connect(null, { login })(withNotification(LoginForm));
