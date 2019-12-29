@@ -32,7 +32,8 @@ const LoginForm: React.FC<AllProps> = props => {
       const { accessToken } = data.login;
       props.showSuccess();
       localStorage.setItem("token", accessToken);
-      props.login(accessToken);
+      window.location.reload();
+      // props.login(accessToken);
     },
     onError(err) {
       props.showError(err.graphQLErrors[0].message);
