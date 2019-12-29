@@ -1,17 +1,32 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { withApollo } from "react-apollo";
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
 
 import Input from "../data/Input";
 import FormButton from "../data/FormButton";
-import { ApolloClient, NormalizedCacheObject } from "apollo-boost";
+import withNotification, {
+  WithNoficationProps
+} from "../hocs/withNotification";
 
-interface RegisterFormProps {
-  client: ApolloClient<NormalizedCacheObject>;
-}
+const REGISTER = gql`
+  mutation Register($email: String!, $password: String!, $handle: String!) {
+    register(email: $email, password: $password, handle: $handle)
+  }
+`;
 
-const RegisterForm: React.FC<RegisterFormProps> = () => {
+const RegisterForm: React.FC<WithNoficationProps> = props => {
+  const [registerMutation] = useMutation(REGISTER, {
+    update(_, { data }) {
+      const result = data.register;
+      props.showSuccess(result);
+    },
+    onError(err) {
+      props.showError(err.graphQLErrors[0].message);
+    }
+  });
+
   return (
     <Formik
       initialValues={{
@@ -28,11 +43,15 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
         password: Yup.string().required(),
         confirmPassword: Yup.string().required()
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 1000);
+      onSubmit={async values => {
+        props.showLoading();
+        await registerMutation({
+          variables: {
+            email: values.email,
+            handle: values.handle,
+            password: values.password
+          }
+        });
       }}
     >
       {props => {
@@ -120,4 +139,4 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
   );
 };
 
-export default withApollo(RegisterForm);
+export default withNotification(RegisterForm);

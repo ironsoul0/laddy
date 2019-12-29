@@ -8,13 +8,14 @@ interface IconProps {
   to: string;
   active?: boolean;
   label?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const Icon: React.FC<IconProps> = props => {
-  const { children, label, active } = props;
+  const { children, label, active, onClick } = props;
 
   return (
-    <Container {...props}>
+    <Container {...props} onClick={onClick}>
       {children}
       {label ? <Label active={!!active}>{label}</Label> : null}
     </Container>

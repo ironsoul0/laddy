@@ -12,9 +12,11 @@ import MenuIcon from "../icons/MenuIcon";
 import Logo from "../icons/Logo";
 import { ApplicationState } from "../../store/reducers";
 import styled from "../../utils/styled";
+import { logout } from "../../store/reducers/user/actions";
 
 interface PropsFromState {
   router: RouterState;
+  logout: typeof logout;
 }
 
 const Main: React.FC<PropsFromState> = props => {
@@ -50,6 +52,12 @@ const Main: React.FC<PropsFromState> = props => {
     </>
   );
 
+  const handleLogout = () => {
+    props.logout();
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <Container>
       <Menu>
@@ -59,7 +67,7 @@ const Main: React.FC<PropsFromState> = props => {
           </MenuIcon>
         </LogoWrapper>
         {width <= 576 ? mainLinks : <DesktopLinks>{mainLinks}</DesktopLinks>}
-        <MenuIcon to="/logout" label="Logout">
+        <MenuIcon to="/logout" label="Logout" onClick={handleLogout}>
           <Logout />
         </MenuIcon>
       </Menu>
@@ -72,7 +80,7 @@ const mapStateToProps = (state: ApplicationState) => ({
   router: state.router
 });
 
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, { logout })(Main);
 
 const LogoWrapper = styled.div`
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {

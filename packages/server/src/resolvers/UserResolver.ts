@@ -64,7 +64,7 @@ export class UserResolver {
 
     const validHandle = await doesHandleExist(handle);
     if (!validHandle) {
-      throw new Error("Such handle does not exist");
+      throw new Error("Invalid handle");
     }
 
     if (newPassword.length > 0) {

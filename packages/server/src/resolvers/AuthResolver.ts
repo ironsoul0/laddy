@@ -41,7 +41,7 @@ export class AuthResolver {
     };
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => String)
   async register(
     @Arg("email") email: string,
     @Arg("password") password: string,
@@ -59,7 +59,7 @@ export class AuthResolver {
 
       if (!confirmed) {
         await sendConfirmationEmail(email, id);
-        return true;
+        return "Check your email";
       }
 
       throw new Error("User already exists");
@@ -67,7 +67,7 @@ export class AuthResolver {
 
     const validHandle = await doesHandleExist(handle);
     if (!validHandle) {
-      throw new Error("Such handle does not exist");
+      throw new Error("Invalid handle");
     }
 
     const hashedPassword = await hash(password, 12);
@@ -80,9 +80,9 @@ export class AuthResolver {
       await sendConfirmationEmail(email, user.id);
     } catch (err) {
       console.log(err);
-      return false;
+      throw new Error("Error occured");
     }
 
-    return true;
+    return "Check your email";
   }
 }
