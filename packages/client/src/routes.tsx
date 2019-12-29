@@ -25,7 +25,7 @@ const Routes: React.FC<RoutesProps> = ({ user }) => (
   <Root>
     <Global styles={normalize} />
     <Global styles={globals} />
-    {!user.loggedIn ? (
+    {user.loggedIn ? (
       <Main>
         <Switch>
           <Route exact path="/">
