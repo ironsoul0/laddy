@@ -74,8 +74,6 @@ const Problems: React.FC<AllProps> = props => {
     ladderProblems: { rating, joined, problems }
   } = data;
 
-  console.log(problems);
-
   return (
     <>
       <Heading>Problems</Heading>
