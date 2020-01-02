@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import Input from "../data/Input";
 import FormButton from "../data/FormButton";
 import withNotification, {
-  WithNoficationProps
+  WithNotificationProps
 } from "../hocs/withNotification";
 import { login } from "../../store/reducers/user/actions";
 
@@ -24,7 +24,7 @@ interface PropsFromDispatch {
   login: typeof login;
 }
 
-type AllProps = WithNoficationProps & PropsFromDispatch;
+type AllProps = WithNotificationProps & PropsFromDispatch;
 
 const LoginForm: React.FC<AllProps> = props => {
   const [loginMutation] = useMutation(LOGIN, {

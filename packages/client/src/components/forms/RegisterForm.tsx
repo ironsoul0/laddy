@@ -7,7 +7,7 @@ import { useMutation } from "@apollo/react-hooks";
 import Input from "../data/Input";
 import FormButton from "../data/FormButton";
 import withNotification, {
-  WithNoficationProps
+  WithNotificationProps
 } from "../hocs/withNotification";
 
 const REGISTER = gql`
@@ -16,14 +16,14 @@ const REGISTER = gql`
   }
 `;
 
-const RegisterForm: React.FC<WithNoficationProps> = props => {
+const RegisterForm: React.FC<WithNotificationProps> = props => {
   const [registerMutation] = useMutation(REGISTER, {
     update(_, { data }) {
       const result = data.register;
       props.showSuccess(result);
     },
     onError(err) {
-      props.showError(err.graphQLErrors[0].message);
+      props.showError(err.graphQLErrors && err.graphQLErrors[0].message);
     }
   });
 

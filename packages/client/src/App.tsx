@@ -10,7 +10,15 @@ import theme from "./styles/theme";
 import store, { history } from "./store";
 
 const client = new ApolloClient({
-  uri: process.env.GRAPHQL_URI || "http://localhost:4000/graphql"
+  uri: process.env.GRAPHQL_URI || "http://localhost:4000/graphql",
+  request: operation => {
+    const token = localStorage.getItem("token");
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ""
+      }
+    });
+  }
 });
 
 const App: React.FC = () => (

@@ -7,7 +7,7 @@ import {
 } from "../../store/reducers/notifications/actions";
 import { NotificationsActionTypes } from "../../store/reducers/notifications/types";
 
-export interface WithNoficationProps {
+export interface WithNotificationProps {
   showLoading: () => void;
   showSuccess: (data?: string) => void;
   showError: (data?: string) => void;

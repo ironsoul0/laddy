@@ -47,7 +47,8 @@ interface ContainerProps {
 
 const Container = styled.div<ContainerProps>`
   position: absolute;
-  width: 180px;
+  min-width: 180px;
+  padding: 0 15px;
   height: 40px;
   border-radius: 5px;
   background-color: ${props => props.theme.colors.white};

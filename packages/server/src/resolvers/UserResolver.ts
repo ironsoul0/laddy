@@ -36,7 +36,7 @@ export class UserResolver {
     return true;
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => String)
   @UseMiddleware(isAuth)
   async updateProfile(
     @Arg("handle") handle: string,
@@ -79,7 +79,7 @@ export class UserResolver {
     }
 
     await userInfo.save();
-    return true;
+    return "Updated!";
   }
 
   @Mutation(() => Boolean)

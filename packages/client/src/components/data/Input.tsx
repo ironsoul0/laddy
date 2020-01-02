@@ -13,6 +13,7 @@ interface InputProps {
   placeholder?: string;
   error?: boolean;
   success?: boolean;
+  attention?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -24,11 +25,15 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   error,
   success,
+  attention,
   id
 }) => {
   return (
     <Container>
-      <Label>{label}</Label>
+      <Label>
+        {label}
+        {attention && <Star> *</Star>}
+      </Label>
       <InputBox
         id={id}
         onChange={onChange}
@@ -82,4 +87,8 @@ const InputBox = styled.input<InputBoxProps>`
   }
 
   ${mixins.dropDecoration};
+`;
+
+const Star = styled.span`
+  color: red;
 `;

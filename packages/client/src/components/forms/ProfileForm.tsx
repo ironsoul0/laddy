@@ -1,16 +1,42 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
 
 import FormButton from "../data/FormButton";
 import Input from "../data/Input";
+import withNotification, {
+  WithNotificationProps
+} from "../hocs/withNotification";
 
-const ProfileForm: React.FC = () => {
+const UPDATE = gql`
+  mutation Update($password: String!, $newPassword: String!, $handle: String!) {
+    updateProfile(
+      password: $password
+      newPassword: $newPassword
+      handle: $handle
+    )
+  }
+`;
+
+const ProfileForm: React.FC<WithNotificationProps> = props => {
+  const [updateMutation] = useMutation(UPDATE, {
+    update(_, { data }) {
+      const result = data.updateProfile;
+      props.showSuccess(result);
+    },
+    onError(err) {
+      props.showError(err.graphQLErrors && err.graphQLErrors[0].message);
+    }
+  });
+
   return (
     <Formik
       initialValues={{
         email: "laddy@app.com",
         handle: "",
+        currentPassword: "",
         password: "",
         confirmPassword: ""
       }}
@@ -19,14 +45,19 @@ const ProfileForm: React.FC = () => {
           .email()
           .required(),
         handle: Yup.string().required(),
+        currentPassword: Yup.string().required(),
         password: Yup.string(),
         confirmPassword: Yup.string()
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 1000);
+      onSubmit={async values => {
+        props.showLoading();
+        await updateMutation({
+          variables: {
+            handle: values.handle,
+            password: values.currentPassword,
+            newPassword: values.confirmPassword
+          }
+        });
       }}
     >
       {props => {
@@ -68,6 +99,24 @@ const ProfileForm: React.FC = () => {
               success={values.handle !== initialValues.handle && !errors.handle}
               onChange={handleChange}
               value={values.handle}
+            />
+            <Input
+              attention
+              id="currentPassword"
+              placeholder="Shhh..."
+              label="Current Password"
+              disabled={false}
+              password={true}
+              error={
+                values.currentPassword !== initialValues.currentPassword &&
+                !!errors.currentPassword
+              }
+              success={
+                values.currentPassword !== initialValues.currentPassword &&
+                !errors.currentPassword
+              }
+              onChange={handleChange}
+              value={values.currentPassword}
             />
             <Input
               id="password"
@@ -114,4 +163,4 @@ const ProfileForm: React.FC = () => {
   );
 };
 
-export default ProfileForm;
+export default withNotification(ProfileForm);
