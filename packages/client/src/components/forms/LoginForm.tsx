@@ -79,7 +79,6 @@ const LoginForm: React.FC<AllProps> = props => {
             />
             <Input
               id="password"
-              placeholder="Shhh..."
               label="Password"
               disabled={false}
               password={true}

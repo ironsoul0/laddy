@@ -1,151 +1,101 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useQuery } from "react-apollo";
+import { withRouter, RouteComponentProps, Redirect } from "react-router";
 
 import styled from "../utils/styled";
 import HeaderCard from "../components/data/HeaderCard";
 import Problem from "../components/data/Problem";
 import Heading from "../components/data/Heading";
 import FloatingButton from "../components/data/FloatingButton";
-import {
-  showNotification,
-  hideNotification
-} from "../store/reducers/notifications/actions";
-import { NotificationsActionTypes } from "../store/reducers/notifications/types";
+import withNotification, {
+  WithNotificationProps
+} from "../components/hocs/withNotification";
+import { GET_LADDER_PROBLEMS } from "../graphql/GetLadderProblems";
+import Centered from "../components/data/Centered";
+import Spinner from "../components/icons/Spinner";
 
-interface ProblemsProps {
-  range: string;
+interface RouteParams {
+  id: string;
 }
 
-interface PropsFromDispatch {
-  showNotification: typeof showNotification;
-  hideNotification: typeof hideNotification;
+interface LadderProblem {
+  id: number;
+  url: string;
+  solved: boolean;
+  difficulty: number;
+  name: string;
 }
 
-type AllProps = ProblemsProps & PropsFromDispatch;
+interface LadderProblemsInfo {
+  rating: string;
+  joined: boolean;
+  problems: LadderProblem[];
+}
+
+interface LadderProblemsData {
+  ladderProblems: LadderProblemsInfo;
+}
+
+interface LadderProblemsVars {
+  ladderID: string;
+}
+
+type AllProps = WithNotificationProps & RouteComponentProps<RouteParams>;
 
 const Problems: React.FC<AllProps> = props => {
+  const { id } = props.match.params;
+  const { data, error } = useQuery<LadderProblemsData, LadderProblemsVars>(
+    GET_LADDER_PROBLEMS,
+    {
+      variables: {
+        ladderID: id
+      }
+    }
+  );
   const [isJoined, setJoined] = useState(false);
 
+  if (error) {
+    return <Redirect to="/" />;
+  }
+
+  if (!data) {
+    return (
+      <Centered>
+        <Spinner color="black" size={35} />
+      </Centered>
+    );
+  }
+
   const handleClick = () => {
-    props.showNotification(NotificationsActionTypes.LOADING_NOTIFICATION);
-    setTimeout(() => {
-      props.showNotification(
-        NotificationsActionTypes.SUCCESS_NOTIFICATION,
-        "Joined!"
-      );
-      setJoined(true);
-    }, 2000);
-    setTimeout(() => {
-      props.hideNotification();
-    }, 4000);
+    props.showLoading();
   };
+
+  const {
+    ladderProblems: { rating, joined, problems }
+  } = data;
+
+  console.log(problems);
 
   return (
     <>
       <Heading>Problems</Heading>
-      <RatingRange>{props.range}</RatingRange>
+      <RatingRange>{rating}</RatingRange>
       <HeaderCard content={["Problem", "Difficulty level"]} />
-      <Problem
-        name="Kekocity"
-        difficulty={3}
-        solved={true}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Krauch's Adventure"
-        difficulty={4}
-        solved={false}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Kekocity"
-        difficulty={3}
-        solved={true}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Krauch's Adventure"
-        difficulty={4}
-        solved={false}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Kekocity"
-        difficulty={3}
-        solved={true}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Krauch's Adventure"
-        difficulty={4}
-        solved={false}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Kekocity"
-        difficulty={3}
-        solved={true}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Krauch's Adventure"
-        difficulty={4}
-        solved={false}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Kekocity"
-        difficulty={3}
-        solved={true}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Krauch's Adventure"
-        difficulty={4}
-        solved={false}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Kekocity"
-        difficulty={3}
-        solved={true}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Krauch's Adventure"
-        difficulty={4}
-        solved={false}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Kekocity"
-        difficulty={3}
-        solved={true}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Krauch's Adventure"
-        difficulty={4}
-        solved={false}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
-      <Problem
-        name="Kekocity"
-        difficulty={3}
-        solved={true}
-        link="https://codeforces.com/contest/1255/problem/E1"
-      />
+      {problems.map(({ id, name, difficulty, solved, url }) => (
+        <Problem
+          key={id}
+          name={name}
+          difficulty={difficulty}
+          solved={solved}
+          url={url}
+        />
+      ))}
       <FloatingButton joined={isJoined} onClick={handleClick} />
     </>
   );
 };
 
-const mapDispatchToProps = {
-  showNotification,
-  hideNotification
-};
-
-export default connect(null, mapDispatchToProps)(Problems);
+export default withNotification(withRouter(Problems));
 
 const RatingRange = styled.p`
   font-size: 17px;

@@ -18,7 +18,7 @@ const mapDispatchToProps = {
   hideNotification
 };
 
-const withNofication = (WrappedComponent: any) => {
+const withNotification = (WrappedComponent: any) => {
   const wrappedComponent: React.FC<any> = props => {
     const showLoading = () => {
       props.showNotification(NotificationsActionTypes.LOADING_NOTIFICATION);
@@ -50,4 +50,4 @@ const withNofication = (WrappedComponent: any) => {
   return connect(null, mapDispatchToProps)(wrappedComponent);
 };
 
-export default withNofication;
+export default withNotification;

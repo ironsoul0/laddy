@@ -33,11 +33,7 @@ const Routes: React.FC<RoutesProps> = ({ user }) => (
           </Route>
           <Route exact path="/ladders" component={Ladders} />
           <Route exact path="/profile" component={Profile} />
-          <Route
-            exact
-            path="/ladders/1"
-            render={(): React.ReactNode => <Problems range="[1300, 1399]" />}
-          />
+          <Route exact path="/ladders/:id" component={Problems} />
           <Redirect to="/" />
         </Switch>
       </Main>

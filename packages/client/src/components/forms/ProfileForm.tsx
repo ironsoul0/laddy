@@ -92,7 +92,6 @@ const ProfileForm: React.FC<WithNotificationProps> = props => {
             />
             <Input
               id="password"
-              placeholder="Shhh..."
               label="New Password"
               disabled={false}
               password={true}
@@ -107,7 +106,6 @@ const ProfileForm: React.FC<WithNotificationProps> = props => {
             />
             <Input
               id="confirmPassword"
-              placeholder="Shhh..."
               label="Confirm New Password"
               disabled={false}
               password={true}
@@ -128,7 +126,6 @@ const ProfileForm: React.FC<WithNotificationProps> = props => {
             <Input
               attention
               id="currentPassword"
-              placeholder="Shhh..."
               label="Current Password"
               disabled={false}
               password={true}

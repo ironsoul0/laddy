@@ -90,7 +90,6 @@ const RegisterForm: React.FC<WithNotificationProps> = props => {
             />
             <Input
               id="password"
-              placeholder="Shhh..."
               label="Password"
               disabled={false}
               password={true}
@@ -105,7 +104,6 @@ const RegisterForm: React.FC<WithNotificationProps> = props => {
             />
             <Input
               id="confirmPassword"
-              placeholder="Shhh..."
               label="Confirm Password"
               disabled={false}
               password={true}

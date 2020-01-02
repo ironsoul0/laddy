@@ -57,12 +57,14 @@ export class LadderResolver {
       );
 
       return {
+        id: problem.id,
         difficulty: problem.difficulty,
         solved,
-        url: `${PROBLEM_URL}/${problem.endpoints[0]}`
+        url: `${PROBLEM_URL}/${problem.endpoints[0]}`,
+        name: problem.name
       };
     });
 
-    return { joined, problems: ladderProblems };
+    return { joined, rating: ladder.rating, problems: ladderProblems };
   }
 }

@@ -28,6 +28,12 @@ const Input: React.FC<InputProps> = ({
   attention,
   id
 }) => {
+  let holder = placeholder;
+
+  if (password) {
+    holder = "shhh..";
+  }
+
   return (
     <Container>
       <Label>
@@ -39,7 +45,7 @@ const Input: React.FC<InputProps> = ({
         onChange={onChange}
         disabled={disabled}
         value={value}
-        placeholder={placeholder}
+        placeholder={holder}
         type={password ? "password" : "text"}
         error={error}
         success={success}

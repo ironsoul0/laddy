@@ -7,17 +7,12 @@ interface ProblemProps {
   name: string;
   difficulty: number;
   solved: boolean;
-  link: string;
+  url: string;
 }
 
-const Problem: React.FC<ProblemProps> = ({
-  name,
-  difficulty,
-  solved,
-  link
-}) => {
+const Problem: React.FC<ProblemProps> = ({ name, difficulty, solved, url }) => {
   const openProblem = (): void => {
-    window.open(link, "_blank");
+    window.open(url, "_blank");
   };
 
   return (

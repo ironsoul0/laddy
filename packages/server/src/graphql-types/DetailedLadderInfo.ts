@@ -1,7 +1,10 @@
-import { ObjectType, Field, Int } from "type-graphql";
+import { ObjectType, Field, Int, ID } from "type-graphql";
 
 @ObjectType()
 class ProblemInfo {
+  @Field(() => ID)
+  id: number;
+
   @Field()
   url: string;
 
@@ -10,10 +13,16 @@ class ProblemInfo {
 
   @Field(() => Int)
   difficulty: number;
+
+  @Field(() => String)
+  name: string;
 }
 
 @ObjectType()
 export class DetailedLadderInfo {
+  @Field(() => String)
+  rating: string;
+
   @Field(() => [ProblemInfo])
   problems: ProblemInfo[];
 
