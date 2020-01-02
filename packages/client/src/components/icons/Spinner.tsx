@@ -7,6 +7,7 @@ import styled from "../../utils/styled";
 interface SpinnerProps {
   color: string;
   size: number;
+  style?: Record<string, string>;
 }
 
 const Spinner: React.FC<SpinnerProps> = props => {

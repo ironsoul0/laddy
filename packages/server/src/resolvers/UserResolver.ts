@@ -1,4 +1,4 @@
-import { Resolver, Ctx, UseMiddleware, Arg, Mutation, Int } from "type-graphql";
+import { Resolver, Ctx, UseMiddleware, Arg, Mutation, ID } from "type-graphql";
 import { compare, hash } from "bcryptjs";
 
 import { MyContext } from "../graphql-types/MyContext";
@@ -14,7 +14,7 @@ export class UserResolver {
   @Mutation(() => Boolean)
   @UseMiddleware(isAuth)
   async toggleLadder(
-    @Arg("ladderID", () => Int) ladderID: number,
+    @Arg("ladderID", () => ID) ladderID: number,
     @Arg("join") join: boolean,
     @Ctx() { payload }: MyContext
   ) {

@@ -91,24 +91,6 @@ const ProfileForm: React.FC<WithNotificationProps> = props => {
               value={values.handle}
             />
             <Input
-              attention
-              id="currentPassword"
-              placeholder="Shhh..."
-              label="Current Password"
-              disabled={false}
-              password={true}
-              error={
-                values.currentPassword !== initialValues.currentPassword &&
-                !!errors.currentPassword
-              }
-              success={
-                values.currentPassword !== initialValues.currentPassword &&
-                !errors.currentPassword
-              }
-              onChange={handleChange}
-              value={values.currentPassword}
-            />
-            <Input
               id="password"
               placeholder="Shhh..."
               label="New Password"
@@ -142,6 +124,24 @@ const ProfileForm: React.FC<WithNotificationProps> = props => {
               }
               onChange={handleChange}
               value={values.confirmPassword}
+            />
+            <Input
+              attention
+              id="currentPassword"
+              placeholder="Shhh..."
+              label="Current Password"
+              disabled={false}
+              password={true}
+              error={
+                values.currentPassword !== initialValues.currentPassword &&
+                !!errors.currentPassword
+              }
+              success={
+                values.currentPassword !== initialValues.currentPassword &&
+                !errors.currentPassword
+              }
+              onChange={handleChange}
+              value={values.currentPassword}
             />
             <FormButton disabled={!hasChanged || hasErrors || isSubmitting}>
               Update

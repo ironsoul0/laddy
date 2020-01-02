@@ -6,24 +6,24 @@ import mixins from "../../styles/mixins";
 import styled from "../../utils/styled";
 
 interface LadderProps {
-  range: string;
-  users?: number;
-  problems?: number;
+  rating: string;
+  totalUsers?: number;
+  totalProblems?: number;
   complete?: number;
   ladderID: number;
 }
 
 const Ladder: React.FC<LadderProps> = ({
-  range,
-  users,
-  problems,
+  rating,
+  totalUsers,
+  totalProblems,
   complete,
   ladderID
 }) => {
   const content = complete ? (
-    <Card content={[range, `${complete}%`]} fontSize={14} />
+    <Card content={[rating, `${complete}%`]} fontSize={14} />
   ) : (
-    <Card content={[range, users!, problems!]} fontSize={14} />
+    <Card content={[rating, totalUsers!, totalProblems!]} fontSize={14} />
   );
 
   return <Container to={`/ladders/${ladderID}`}>{content}</Container>;

@@ -1,9 +1,9 @@
-import { Resolver, Query, Arg, UseMiddleware, Ctx, Int } from "type-graphql";
+import { Resolver, Query, Arg, UseMiddleware, Ctx, ID } from "type-graphql";
 
 import { Ladder } from "../entity/Ladder";
 import { User } from "../entity/User";
 import { LadderInfo } from "../graphql-types/LadderInfo";
-import { ProblemInfo } from "../graphql-types/ProblemInfo";
+import { DetailedLadderInfo } from "../graphql-types/DetailedLadderInfo";
 import { isAuth } from "../middleware/isAuth";
 import { MyContext } from "../graphql-types/MyContext";
 import { PROBLEM_URL, updateSubmissions } from "../utils/codeforces";
@@ -12,7 +12,7 @@ import { PROBLEM_URL, updateSubmissions } from "../utils/codeforces";
 export class LadderResolver {
   @Query(() => [LadderInfo])
   @UseMiddleware(isAuth)
-  async getLaddersInfo(@Ctx() { payload }: MyContext) {
+  async laddersInfo(@Ctx() { payload }: MyContext) {
     const userID = payload?.userID;
     const ladders = await Ladder.find({ relations: ["problems", "users"] });
 
@@ -31,10 +31,10 @@ export class LadderResolver {
     return laddersInfo;
   }
 
-  @Query(() => [ProblemInfo])
+  @Query(() => DetailedLadderInfo)
   @UseMiddleware(isAuth)
-  async getLadderProblems(
-    @Arg("ladderID", () => Int) ladderID: number,
+  async ladderProblems(
+    @Arg("ladderID", () => ID) ladderID: number,
     @Ctx() { payload }: MyContext
   ) {
     const ladder = await Ladder.findOne(ladderID, { relations: ["problems"] });
@@ -44,8 +44,10 @@ export class LadderResolver {
 
     const userID = payload?.userID;
     const user = (await User.findOne(userID, {
-      relations: ["problems"]
+      relations: ["problems", "ladders"]
     })) as User;
+
+    const joined = user.ladders.some(ladder => ladder.id === ladderID);
 
     await updateSubmissions(user);
 
@@ -61,6 +63,6 @@ export class LadderResolver {
       };
     });
 
-    return ladderProblems;
+    return { joined, problems: ladderProblems };
   }
 }

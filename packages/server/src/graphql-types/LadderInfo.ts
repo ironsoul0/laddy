@@ -1,8 +1,8 @@
-import { ObjectType, Field, Int } from "type-graphql";
+import { ObjectType, Field, Int, ID } from "type-graphql";
 
 @ObjectType()
 export class LadderInfo {
-  @Field(() => Int)
+  @Field(() => ID)
   id: number;
 
   @Field(() => Int)
