@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
 
 import FormButton from "../data/FormButton";
@@ -9,19 +8,10 @@ import Input from "../data/Input";
 import withNotification, {
   WithNotificationProps
 } from "../hocs/withNotification";
-
-const UPDATE = gql`
-  mutation Update($password: String!, $newPassword: String!, $handle: String!) {
-    updateProfile(
-      password: $password
-      newPassword: $newPassword
-      handle: $handle
-    )
-  }
-`;
+import { UPDATE_PROFILE } from "../../graphql/UpdateProfile";
 
 const ProfileForm: React.FC<WithNotificationProps> = props => {
-  const [updateMutation] = useMutation(UPDATE, {
+  const [updateMutation] = useMutation(UPDATE_PROFILE, {
     update(_, { data }) {
       const result = data.updateProfile;
       props.showSuccess(result);

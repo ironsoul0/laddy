@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
 
 import Input from "../data/Input";
@@ -9,12 +8,7 @@ import FormButton from "../data/FormButton";
 import withNotification, {
   WithNotificationProps
 } from "../hocs/withNotification";
-
-const REGISTER = gql`
-  mutation Register($email: String!, $password: String!, $handle: String!) {
-    register(email: $email, password: $password, handle: $handle)
-  }
-`;
+import { REGISTER } from "../../graphql/Register";
 
 const RegisterForm: React.FC<WithNotificationProps> = props => {
   const [registerMutation] = useMutation(REGISTER, {

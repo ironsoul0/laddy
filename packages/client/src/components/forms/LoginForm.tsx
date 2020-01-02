@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { gql } from "apollo-boost";
 import { useMutation } from "react-apollo";
 import { connect } from "react-redux";
 
@@ -11,14 +10,7 @@ import withNotification, {
   WithNotificationProps
 } from "../hocs/withNotification";
 import { login } from "../../store/reducers/user/actions";
-
-const LOGIN = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      accessToken
-    }
-  }
-`;
+import { LOGIN } from "../../graphql/Login";
 
 interface PropsFromDispatch {
   login: typeof login;
@@ -33,7 +25,6 @@ const LoginForm: React.FC<AllProps> = props => {
       props.showSuccess();
       localStorage.setItem("token", accessToken);
       window.location.reload();
-      // props.login(accessToken);
     },
     onError(err) {
       props.showError(err.graphQLErrors[0].message);
