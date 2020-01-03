@@ -2669,12 +2669,11 @@
          ]
       },
       {
-         "name": "Mashmokh and ACM",
-         "url": "http://codeforces.com/problemset/problem/414/B",
+         "name": "Stack of Presents",
+         "url": "https://codeforces.com/problemset/problem/1279/C",
          "difficulty": 3,
          "endpoints": [
-            "414/B",
-            "415/D"
+            "1279/C"
          ]
       },
       {
@@ -3022,12 +3021,11 @@
          ]
       },
       {
-         "name": "Boredom",
-         "url": "http://codeforces.com/problemset/problem/455/A",
+         "name": "A and B",
+         "url": "https://codeforces.com/problemset/problem/1278/B",
          "difficulty": 4,
          "endpoints": [
-            "455/A",
-            "456/C"
+            "1278/B"
          ]
       },
       {
@@ -4646,12 +4644,11 @@
          ]
       },
       {
-         "name": "Book of Evil",
-         "url": "http://codeforces.com/problemset/problem/337/D",
+         "name": "Berry Jam",
+         "url": "https://codeforces.com/problemset/problem/1278/C",
          "difficulty": 5,
          "endpoints": [
-            "337/D",
-            "338/B"
+            "1278/C"
          ]
       },
       {

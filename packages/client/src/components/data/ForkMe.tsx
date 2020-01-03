@@ -44,6 +44,8 @@ const ForkMe = () => {
 export default ForkMe;
 
 const ForkIcon = styled.a`
+  z-index: 2;
+
   &:hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
   }

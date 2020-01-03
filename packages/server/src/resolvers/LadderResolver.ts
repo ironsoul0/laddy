@@ -86,7 +86,11 @@ export class LadderResolver {
       ladder => ladder.id === parseInt(ladderID, 10)
     );
 
-    await updateSubmissions(user);
+    try {
+      await updateSubmissions(user);
+    } catch (err) {
+      console.log(err);
+    }
 
     const ladderProblems = ladder.problems.map(problem => {
       const solved = user.problems.some(
@@ -102,6 +106,10 @@ export class LadderResolver {
       };
     });
 
-    return { joined, rating: ladder.rating, problems: ladderProblems };
+    return {
+      joined,
+      rating: ladder.rating,
+      problems: ladderProblems.reverse()
+    };
   }
 }
