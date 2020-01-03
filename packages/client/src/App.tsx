@@ -4,6 +4,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { ThemeProvider } from "emotion-theming";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { InMemoryCache } from "apollo-cache-inmemory";
 
 import Routes from "./routes";
 import theme from "./styles/theme";
@@ -11,6 +12,7 @@ import store, { history } from "./store";
 
 const client = new ApolloClient({
   uri: process.env.GRAPHQL_URI || "http://localhost:4000/graphql",
+  cache: new InMemoryCache(),
   request: operation => {
     const token = localStorage.getItem("token");
     operation.setContext({

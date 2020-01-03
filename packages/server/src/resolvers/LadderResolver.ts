@@ -1,4 +1,12 @@
-import { Resolver, Query, Arg, UseMiddleware, Ctx, ID } from "type-graphql";
+import {
+  Resolver,
+  Query,
+  Arg,
+  UseMiddleware,
+  Ctx,
+  ID,
+  Mutation
+} from "type-graphql";
 
 import { Ladder } from "../entity/Ladder";
 import { User } from "../entity/User";
@@ -10,6 +18,33 @@ import { PROBLEM_URL, updateSubmissions } from "../utils/codeforces";
 
 @Resolver()
 export class LadderResolver {
+  @Mutation(() => Boolean)
+  @UseMiddleware(isAuth)
+  async toggleLadder(
+    @Arg("ladderID", () => ID) ladderID: string,
+    @Arg("join") join: boolean,
+    @Ctx() { payload }: MyContext
+  ) {
+    const userID = payload!.userID;
+    const user = await User.findOne(userID, { relations: ["ladders"] });
+    const ladder = await Ladder.findOne(ladderID);
+
+    if (!user || !ladder) {
+      throw new Error("Invalid User ID or Ladder ID");
+    }
+
+    if (join) {
+      user.ladders.push(ladder);
+    } else {
+      user.ladders = user.ladders.filter(
+        ladder => ladder.id !== parseInt(ladderID, 10)
+      );
+    }
+
+    await user.save();
+    return join;
+  }
+
   @Query(() => [LadderInfo])
   @UseMiddleware(isAuth)
   async laddersInfo(@Ctx() { payload }: MyContext) {

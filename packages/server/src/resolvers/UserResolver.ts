@@ -1,41 +1,15 @@
-import { Resolver, Ctx, UseMiddleware, Arg, Mutation, ID } from "type-graphql";
+import { Resolver, Ctx, UseMiddleware, Arg, Mutation } from "type-graphql";
 import { compare, hash } from "bcryptjs";
 
 import { MyContext } from "../graphql-types/MyContext";
 import { User } from "../entity/User";
 import { isAuth } from "../middleware/isAuth";
-import { Ladder } from "../entity/Ladder";
 import { handleValidation, passwordValidation } from "../yup/userSchema";
 import { doesHandleExist } from "../utils/codeforces";
 import { redis } from "../utils/redis";
 
 @Resolver()
 export class UserResolver {
-  @Mutation(() => Boolean)
-  @UseMiddleware(isAuth)
-  async toggleLadder(
-    @Arg("ladderID", () => ID) ladderID: number,
-    @Arg("join") join: boolean,
-    @Ctx() { payload }: MyContext
-  ) {
-    const userID = payload!.userID;
-    const user = await User.findOne(userID, { relations: ["ladders"] });
-    const ladder = await Ladder.findOne(ladderID);
-
-    if (!user || !ladder) {
-      throw new Error("Invalid User ID or Ladder ID");
-    }
-
-    if (join) {
-      user.ladders.push(ladder);
-    } else {
-      user.ladders = user.ladders.filter(ladder => ladder.id !== ladderID);
-    }
-
-    await user.save();
-    return true;
-  }
-
   @Mutation(() => String)
   @UseMiddleware(isAuth)
   async updateProfile(
