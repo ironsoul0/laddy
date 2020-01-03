@@ -10,7 +10,13 @@ import withNotification, {
 } from "../hocs/withNotification";
 import { UPDATE_PROFILE } from "../../graphql/UpdateProfile";
 
-const ProfileForm: React.FC<WithNotificationProps> = props => {
+interface ProfileFormProps {
+  email: string;
+  handle: string;
+}
+
+const ProfileForm: React.FC<WithNotificationProps &
+  ProfileFormProps> = props => {
   const [updateMutation] = useMutation(UPDATE_PROFILE, {
     update(_, { data }) {
       const result = data.updateProfile;
@@ -24,8 +30,8 @@ const ProfileForm: React.FC<WithNotificationProps> = props => {
   return (
     <Formik
       initialValues={{
-        email: "laddy@app.com",
-        handle: "",
+        email: props.email,
+        handle: props.handle,
         currentPassword: "",
         password: "",
         confirmPassword: ""
@@ -70,7 +76,6 @@ const ProfileForm: React.FC<WithNotificationProps> = props => {
           <form onSubmit={handleSubmit}>
             <Input
               id="email"
-              placeholder="laddy@app.com"
               label="Email"
               disabled={true}
               password={false}

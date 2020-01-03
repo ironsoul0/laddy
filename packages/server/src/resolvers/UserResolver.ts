@@ -1,7 +1,15 @@
-import { Resolver, Ctx, UseMiddleware, Arg, Mutation } from "type-graphql";
+import {
+  Resolver,
+  Ctx,
+  UseMiddleware,
+  Arg,
+  Mutation,
+  Query
+} from "type-graphql";
 import { compare, hash } from "bcryptjs";
 
 import { MyContext } from "../graphql-types/MyContext";
+import { ProfileResponse } from "../graphql-types/ProfileResponse";
 import { User } from "../entity/User";
 import { isAuth } from "../middleware/isAuth";
 import { handleValidation, passwordValidation } from "../yup/userSchema";
@@ -10,6 +18,17 @@ import { redis } from "../utils/redis";
 
 @Resolver()
 export class UserResolver {
+  @Query(() => ProfileResponse)
+  @UseMiddleware(isAuth)
+  async profile(@Ctx() { payload }: MyContext) {
+    const userID = payload?.userID;
+    const user = (await User.findOne(userID)) as User;
+    return {
+      email: user.email,
+      handle: user.handle
+    };
+  }
+
   @Mutation(() => String)
   @UseMiddleware(isAuth)
   async updateProfile(

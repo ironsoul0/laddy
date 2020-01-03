@@ -1,8 +1,13 @@
+import "dotenv/config";
+import "reflect-metadata";
 import { hash } from "bcryptjs";
+import { getConnectionOptions, createConnection } from "typeorm";
 
 import { User } from "../entity/User";
 import { Ladder } from "../entity/Ladder";
 import { Problem } from "../entity/Problem";
+
+import ladders from "./ladders.json";
 
 export const _fillWithMockData = async () => {
   const password = await hash("123", 12);
@@ -11,16 +16,19 @@ export const _fillWithMockData = async () => {
   ironsoul.email = "ironsoul@gmail.com";
   ironsoul.handle = "ironsoul";
   ironsoul.password = password;
+  ironsoul.confirmed = true;
 
   const cmaster = new User();
   cmaster.email = "cmaster@gmail.com";
   cmaster.handle = "cmaster";
   cmaster.password = password;
+  cmaster.confirmed = true;
 
   const krauch = new User();
   krauch.email = "krauch@gmail.com";
   krauch.handle = "krauch";
   krauch.password = password;
+  krauch.confirmed = true;
 
   await ironsoul.save();
   await cmaster.save();
@@ -72,3 +80,51 @@ export const _fillWithMockData = async () => {
   await ladder1.save();
   await ladder2.save();
 };
+
+const fillWithData = async () => {
+  const dbOptions = await getConnectionOptions(
+    process.env.NODE_ENV || "development"
+  );
+  const connection = await createConnection({ ...dbOptions, name: "default" });
+
+  await connection.dropDatabase();
+  await connection.synchronize();
+
+  const problemMap: any = {};
+
+  for (const [ladderID, problems] of Object.entries(ladders)) {
+    const ladder = new Ladder();
+    ladder.rating = ladderID;
+    await ladder.save();
+
+    for (const problem of problems) {
+      if (!problemMap[problem.url]) {
+        const newProblem = new Problem();
+        newProblem.difficulty = problem.difficulty;
+        newProblem.endpoints = problem.endpoints;
+        newProblem.name = problem.name;
+        newProblem.ladders = [];
+        problemMap[problem.url] = newProblem;
+      }
+      const currentProblem = problemMap[problem.url];
+      currentProblem.ladders.push(ladder);
+      await currentProblem.save();
+    }
+  }
+
+  // for (const problem of Object.values(problemMap)) {
+  //   const cur: any = problem;
+  //   await cur.save();
+  // }
+
+  // for (const [ladderID, problems] of Object.entries(ladders)) {
+  //   const ladder = new Ladder();
+  //   ladder.rating = ladderID;
+  //   ladder.problems = [];
+  //   for (const problem of problems) {
+  //     ladder.problems.push();
+  //   }
+  // }
+};
+
+fillWithData();

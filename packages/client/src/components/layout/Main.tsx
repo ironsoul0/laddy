@@ -37,14 +37,14 @@ const Main: React.FC<PropsFromState> = props => {
     <>
       <MenuIcon
         to="/ladders"
-        active={location.includes("ladders")}
+        isActiveIcon={location.includes("ladders")}
         label="Main"
       >
         <List />
       </MenuIcon>
       <MenuIcon
         to="/profile"
-        active={location.includes("profile")}
+        isActiveIcon={location.includes("profile")}
         label="Profile"
       >
         <User />

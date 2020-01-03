@@ -40,7 +40,8 @@ interface ItemProps {
 const Item = styled.p<ItemProps>`
   font-size: ${props => props.fontSize}px;
   margin: 10px 0;
-  width: 175px;
+  width: 165px;
+  padding: 0px 5px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

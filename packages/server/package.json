@@ -38,6 +38,7 @@
   },
   "scripts": {
     "start": "nodemon --exec ts-node --files src/index.ts",
+    "fill-data": "ts-node --files src/utils/data.ts",
     "build": "tsc"
   }
 }

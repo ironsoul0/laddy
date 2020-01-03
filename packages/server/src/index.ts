@@ -5,25 +5,19 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { createConnection, getConnectionOptions } from "typeorm";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 
 import { UserResolver } from "./resolvers/UserResolver";
 import { AuthResolver } from "./resolvers/AuthResolver";
 import { LadderResolver } from "./resolvers/LadderResolver";
 
-import { _fillWithMockData } from "./utils/mock";
-
 const bootstrap = async () => {
   const app = express();
   app.use(cors());
-  app.use(cookieParser());
 
   const dbOptions = await getConnectionOptions(
     process.env.NODE_ENV || "development"
   );
   await createConnection({ ...dbOptions, name: "default" });
-
-  // process.env.DEVELOPMENT && (await _fillWithMockData());
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
