@@ -6,33 +6,39 @@ import styled from "../../utils/styled";
 
 interface IconProps {
   to: string;
-  active?: boolean;
+  isActiveIcon?: boolean;
   label?: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const Icon: React.FC<IconProps> = props => {
-  const { children, label, active, onClick } = props;
+  const { children, label, isActiveIcon, onClick } = props;
 
   return (
-    <Container {...props} onClick={onClick}>
+    <Container
+      style={{ color: !!isActiveIcon ? "#f5cf67" : "black" }}
+      onClick={onClick}
+      to={props.to}
+    >
       {children}
-      {label ? <Label active={!!active}>{label}</Label> : null}
+      {label ? <Label isActiveIcon={!!isActiveIcon}>{label}</Label> : null}
     </Container>
   );
 };
 
 export default Icon;
 
-const Container = styled(NavLink)<IconProps>`
+interface StyleProps {
+  isActiveIcon: boolean;
+}
+
+const Container = styled(NavLink)`
   display: block;
   width: 100%;
   text-align: center;
   font-size: 28px;
   height: 50px;
   transition: color 0.2s ease-in-out;
-  color: ${props =>
-    props.active ? props.theme.colors.yellow : props.theme.colors.black};
   ${mixins.dropDecoration};
 
   &:nth-of-type(1) {
@@ -50,18 +56,14 @@ const Container = styled(NavLink)<IconProps>`
   }
 `;
 
-interface LabelProps {
-  active: boolean;
-}
-
-const Label = styled.span<LabelProps>`
+const Label = styled.span<StyleProps>`
   font-size: 14px;
   display: block;
   opacity: 0;
   transition: opacity 0.1s linear, font-size 0.1s linear;
 
   color: ${props =>
-    props.active ? props.theme.colors.yellow : props.theme.colors.black};
+    props.isActiveIcon ? props.theme.colors.yellow : props.theme.colors.black};
 
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}) {
     opacity: 1;
