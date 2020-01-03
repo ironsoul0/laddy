@@ -11,10 +11,7 @@ import { sendConfirmationEmail } from "../utils/sendConfirmationEmail";
 @Resolver()
 export class AuthResolver {
   @Mutation(() => LoginResponse)
-  async login(
-    @Arg("email") email: string,
-    @Arg("password") password: string
-  ): Promise<LoginResponse> {
+  async login(@Arg("email") email: string, @Arg("password") password: string) {
     try {
       await loginSchema.validate({ email, password });
     } catch (err) {
@@ -36,8 +33,7 @@ export class AuthResolver {
     }
 
     return {
-      accessToken: createAccessToken(user),
-      user
+      accessToken: createAccessToken(user)
     };
   }
 

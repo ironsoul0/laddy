@@ -74,6 +74,10 @@ const Problems: React.FC<AllProps> = props => {
     ladderProblems: { rating, joined, problems }
   } = data;
 
+  if (joined && !isJoined) {
+    setJoined(true);
+  }
+
   return (
     <>
       <Heading>Problems</Heading>

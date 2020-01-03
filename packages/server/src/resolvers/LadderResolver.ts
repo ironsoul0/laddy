@@ -34,7 +34,7 @@ export class LadderResolver {
   @Query(() => DetailedLadderInfo)
   @UseMiddleware(isAuth)
   async ladderProblems(
-    @Arg("ladderID", () => ID) ladderID: number,
+    @Arg("ladderID", () => ID) ladderID: string,
     @Ctx() { payload }: MyContext
   ) {
     const ladder = await Ladder.findOne(ladderID, { relations: ["problems"] });
@@ -47,7 +47,9 @@ export class LadderResolver {
       relations: ["problems", "ladders"]
     })) as User;
 
-    const joined = user.ladders.some(ladder => ladder.id === ladderID);
+    const joined = user.ladders.some(
+      ladder => ladder.id === parseInt(ladderID, 10)
+    );
 
     await updateSubmissions(user);
 
