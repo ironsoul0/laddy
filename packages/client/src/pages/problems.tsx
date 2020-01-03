@@ -56,52 +56,55 @@ const Problems: React.FC<AllProps> = props => {
     }
   });
 
-  const [toggleLadder] = useMutation(TOGGLE_LADDER, {
-    update(cache, { data }) {
-      props.showSuccess(data.toggleLadder ? "Joined!" : "Disjoined!");
+  const [toggleLadder, { loading: loadingMutation }] = useMutation(
+    TOGGLE_LADDER,
+    {
+      update(cache, { data }) {
+        props.showSuccess(data.toggleLadder ? "Joined" : "Disjoined");
 
-      try {
-        const cachedData: LaddersInfoData | null = cache.readQuery({
-          query: GET_LADDERS_INFO
-        });
-        if (cachedData) {
-          const ladders = cachedData.laddersInfo;
-          const toUpdate = ladders.filter(ladder => ladder.id === id);
-          toUpdate[0].joined = data.toggleLadder;
-          cache.writeQuery({
-            query: GET_LADDERS_INFO,
-            data: { laddersInfo: ladders }
+        try {
+          const cachedData: LaddersInfoData | null = cache.readQuery({
+            query: GET_LADDERS_INFO
           });
-        }
-      } catch {
-        console.log("No data in cache");
-      }
-
-      const getLadderQuery = {
-        query: GET_LADDER_PROBLEMS,
-        variables: {
-          ladderID: id
-        }
-      };
-
-      const problemsData = cache.readQuery(
-        getLadderQuery
-      ) as LadderProblemsData;
-
-      cache.writeQuery({
-        ...getLadderQuery,
-        data: {
-          ladderProblems: {
-            ...problemsData.ladderProblems,
-            joined: data.toggleLadder
+          if (cachedData) {
+            const ladders = cachedData.laddersInfo;
+            const toUpdate = ladders.filter(ladder => ladder.id === id);
+            toUpdate[0].joined = data.toggleLadder;
+            cache.writeQuery({
+              query: GET_LADDERS_INFO,
+              data: { laddersInfo: ladders }
+            });
           }
+        } catch {
+          console.log("No data in cache");
         }
-      });
-    },
-    onError() {
-      props.showError();
+
+        const getLadderQuery = {
+          query: GET_LADDER_PROBLEMS,
+          variables: {
+            ladderID: id
+          }
+        };
+
+        const problemsData = cache.readQuery(
+          getLadderQuery
+        ) as LadderProblemsData;
+
+        cache.writeQuery({
+          ...getLadderQuery,
+          data: {
+            ladderProblems: {
+              ...problemsData.ladderProblems,
+              joined: data.toggleLadder
+            }
+          }
+        });
+      },
+      onError() {
+        props.showError();
+      }
     }
-  });
+  );
 
   if (ladderProblemsError) {
     return <Redirect to="/" />;
@@ -138,7 +141,11 @@ const Problems: React.FC<AllProps> = props => {
           url={url}
         />
       ))}
-      <FloatingButton joined={joined} onClick={handleClick} />
+      <FloatingButton
+        joined={joined}
+        onClick={handleClick}
+        disabled={loadingMutation}
+      />
     </>
   );
 };

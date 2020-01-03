@@ -4,6 +4,7 @@ import Div100vh from "react-div-100vh";
 
 import Notification from "../data/Notification";
 import styled from "../../utils/styled";
+import ForkMe from "../data/ForkMe";
 
 interface RootProps {
   className?: string;
@@ -13,6 +14,7 @@ interface RootProps {
 const Root: React.FC<RootProps> = ({ children }) => {
   return (
     <Wrapper>
+      <ForkMe />
       <Notification />
       {children}
     </Wrapper>

@@ -31,7 +31,7 @@ const Input: React.FC<InputProps> = ({
   let holder = placeholder;
 
   if (password) {
-    holder = "shhh..";
+    holder = "At least 3 characters";
   }
 
   return (

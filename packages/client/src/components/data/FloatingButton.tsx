@@ -5,12 +5,17 @@ import styled from "../../utils/styled";
 
 interface FloatingButtonProps {
   joined: boolean;
+  disabled?: boolean;
   onClick: () => void;
 }
 
 const FloatingButton: React.FC<FloatingButtonProps> = props => {
   return (
-    <Button joined={props.joined} onClick={props.onClick}>
+    <Button
+      joined={props.joined}
+      onClick={props.onClick}
+      disabled={props.disabled}
+    >
       <Plus />
     </Button>
   );
