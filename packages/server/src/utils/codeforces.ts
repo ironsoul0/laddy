@@ -76,7 +76,10 @@ export const updateSubmissions = async (user: User) => {
       hasMatch(problem, submission)
     );
     if (ladderProblem.length > 0) {
-      user.problems.push(ladderProblem[0]);
+      const alreadySolved = user.problems.some(
+        problem => problem.id === ladderProblem[0].id
+      );
+      if (!alreadySolved) user.problems.push(ladderProblem[0]);
     }
   });
 

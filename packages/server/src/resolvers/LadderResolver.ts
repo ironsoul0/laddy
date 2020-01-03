@@ -79,7 +79,7 @@ export class LadderResolver {
 
     const userID = payload?.userID;
     const user = (await User.findOne(userID, {
-      relations: ["problems", "ladders"]
+      relations: ["ladders", "problems"]
     })) as User;
 
     const joined = user.ladders.some(
