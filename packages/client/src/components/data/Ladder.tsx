@@ -10,7 +10,7 @@ interface LadderProps {
   totalUsers?: number;
   totalProblems?: number;
   complete?: number;
-  ladderID: number;
+  ladderID: string;
 }
 
 const Ladder: React.FC<LadderProps> = ({

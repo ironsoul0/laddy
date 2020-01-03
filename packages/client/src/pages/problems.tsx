@@ -15,6 +15,7 @@ import { TOGGLE_LADDER } from "../graphql/ToggleLadder";
 import Centered from "../components/data/Centered";
 import Spinner from "../components/icons/Spinner";
 import { GET_LADDERS_INFO } from "../graphql/GetLaddersInfo";
+import { LaddersInfoData } from "./ladders";
 
 interface RouteParams {
   id: string;
@@ -60,10 +61,12 @@ const Problems: React.FC<AllProps> = props => {
       props.showSuccess(data.toggleLadder ? "Joined!" : "Disjoined!");
 
       try {
-        const cachedData: any = cache.readQuery({ query: GET_LADDERS_INFO });
-        const ladders = cachedData.laddersInfo;
-        if (ladders) {
-          const toUpdate = ladders.filter((ladder: any) => ladder.id === id);
+        const cachedData: LaddersInfoData | null = cache.readQuery({
+          query: GET_LADDERS_INFO
+        });
+        if (cachedData) {
+          const ladders = cachedData.laddersInfo;
+          const toUpdate = ladders.filter(ladder => ladder.id === id);
           toUpdate[0].joined = data.toggleLadder;
           cache.writeQuery({
             query: GET_LADDERS_INFO,
@@ -81,7 +84,9 @@ const Problems: React.FC<AllProps> = props => {
         }
       };
 
-      const problemsData: any = cache.readQuery(getLadderQuery);
+      const problemsData = cache.readQuery(
+        getLadderQuery
+      ) as LadderProblemsData;
 
       cache.writeQuery({
         ...getLadderQuery,

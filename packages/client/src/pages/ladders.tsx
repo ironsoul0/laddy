@@ -11,14 +11,14 @@ import { GET_LADDERS_INFO } from "../graphql/GetLaddersInfo";
 import Centered from "../components/data/Centered";
 
 interface LadderInfo {
-  id: number;
+  id: string;
   totalUsers: number;
   rating: string;
   totalProblems: number;
   joined: boolean;
 }
 
-interface LaddersInfoData {
+export interface LaddersInfoData {
   laddersInfo: LadderInfo[];
 }
 
