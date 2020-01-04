@@ -24,7 +24,8 @@ module.exports = [
   {
     name: "production",
     type: "postgres",
-    url: process.env.DATABASE_URL,
+    username: "ironsoul",
+    database: "laddy",
     synchronize: true, 
     logging: false,
     entities: ["dist/entity/**/*.js"],
