@@ -8,7 +8,7 @@
     "bootstrap": "lerna bootstrap --hoist",
     "start": "lerna run start --scope={@laddy/client,@laddy/server} --stream",
     "build": "lerna run build --scope={@laddy/client,@laddy/server} --stream",
-    "start:prod": "lerna run start:prod --scope={@laddy/server} --stream",
+    "start:prod": "lerna run start:prod --scope=@laddy/server --stream",
     "fill-data": "lerna run fill-data --scope=@laddy/server --stream"
   }
 }
