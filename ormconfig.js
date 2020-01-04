@@ -25,6 +25,7 @@ module.exports = [
     name: "production",
     type: "postgres",
     username: "ironsoul",
+    password: process.env.DB_PASSWORD,
     database: "laddy",
     synchronize: true, 
     logging: false,
