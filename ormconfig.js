@@ -24,9 +24,9 @@ module.exports = [
   {
     name: "production",
     type: "postgres",
-    username: "ironsoul",
+    username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
-    database: "laddy",
+    database: process.env.DB_NAME,
     synchronize: true, 
     logging: false,
     entities: ["dist/entity/**/*.js"],
