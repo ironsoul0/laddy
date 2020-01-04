@@ -16,4 +16,7 @@ export class LadderInfo {
 
   @Field(() => Boolean)
   joined: boolean;
+
+  @Field(() => Int)
+  completed: number;
 }

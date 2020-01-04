@@ -7,6 +7,7 @@ export const GET_LADDERS_INFO = gql`
       totalUsers
       rating
       totalProblems
+      completed
       joined
     }
   }

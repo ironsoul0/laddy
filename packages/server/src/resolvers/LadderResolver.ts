@@ -49,16 +49,32 @@ export class LadderResolver {
   @UseMiddleware(isAuth)
   async laddersInfo(@Ctx() { payload }: MyContext) {
     const userID = payload?.userID;
+    const user = await User.findOne(userID, { relations: ["problems"] });
+
     const ladders = await Ladder.find({ relations: ["problems", "users"] });
 
     const laddersInfo = ladders.map(ladder => {
       const joined = ladder.users.some(user => user.id === userID);
+
+      const countSolved = ladder.problems.reduce((result, problem) => {
+        const isSolved = user?.problems.some(
+          solvedProblem => solvedProblem.id === problem.id
+        )
+          ? 1
+          : 0;
+        return result + isSolved;
+      }, 0);
+
+      const completed = Math.floor(
+        (countSolved / ladder.problems.length) * 100
+      );
 
       return {
         rating: ladder.rating,
         totalUsers: ladder.users.length,
         totalProblems: ladder.problems.length,
         id: ladder.id,
+        completed,
         joined
       };
     });

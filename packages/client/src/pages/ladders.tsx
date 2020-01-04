@@ -16,6 +16,7 @@ interface LadderInfo {
   rating: string;
   totalProblems: number;
   joined: boolean;
+  completed: number;
 }
 
 export interface LaddersInfoData {
@@ -46,18 +47,28 @@ const Ladders: React.FC = () => {
         firstIsActive={isJoined}
         setFirstActive={setJoined}
       />
-      {((isJoined && joinedLadders.length > 0) || !isJoined) && (
-        <HeaderCard content={["Rating", "Users", "Problems"]} />
+      {!isJoined && <HeaderCard content={["Rating", "Users", "Problems"]} />}
+      {isJoined && joinedLadders.length > 0 && (
+        <HeaderCard content={["Rating", "Completed"]} />
       )}
-      {(isJoined ? joinedLadders : laddersInfo).map(ladder => (
-        <Ladder
-          key={ladder.id}
-          rating={ladder.rating}
-          ladderID={ladder.id}
-          totalUsers={ladder.totalUsers}
-          totalProblems={ladder.totalProblems}
-        />
-      ))}
+      {isJoined
+        ? joinedLadders.map(ladder => (
+            <Ladder
+              key={ladder.id}
+              rating={ladder.rating}
+              ladderID={ladder.id}
+              completed={ladder.completed}
+            />
+          ))
+        : laddersInfo.map(ladder => (
+            <Ladder
+              key={ladder.id}
+              rating={ladder.rating}
+              ladderID={ladder.id}
+              totalUsers={ladder.totalUsers}
+              totalProblems={ladder.totalProblems}
+            />
+          ))}
       {isJoined && joinedLadders.length === 0 && (
         <Info>You didn&apos;t join any ladders yet.</Info>
       )}

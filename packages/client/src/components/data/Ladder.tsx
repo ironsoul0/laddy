@@ -9,7 +9,7 @@ interface LadderProps {
   rating: string;
   totalUsers?: number;
   totalProblems?: number;
-  complete?: number;
+  completed?: number;
   ladderID: string;
 }
 
@@ -17,14 +17,15 @@ const Ladder: React.FC<LadderProps> = ({
   rating,
   totalUsers,
   totalProblems,
-  complete,
+  completed,
   ladderID
 }) => {
-  const content = complete ? (
-    <Card content={[rating, `${complete}%`]} fontSize={14} />
-  ) : (
-    <Card content={[rating, totalUsers!, totalProblems!]} fontSize={14} />
-  );
+  const content =
+    completed !== undefined ? (
+      <Card content={[rating, `${completed}%`]} fontSize={14} />
+    ) : (
+      <Card content={[rating, totalUsers!, totalProblems!]} fontSize={14} />
+    );
 
   return <Container to={`/ladders/${ladderID}`}>{content}</Container>;
 };
