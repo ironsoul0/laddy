@@ -73,7 +73,7 @@ export class UserResolver {
     }
 
     await userInfo.save();
-    return "Updated!";
+    return "Updated";
   }
 
   @Mutation(() => String)

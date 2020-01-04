@@ -41,7 +41,9 @@ const LoginForm: React.FC<AllProps> = props => {
         email: Yup.string()
           .email()
           .required(),
-        password: Yup.string().required()
+        password: Yup.string()
+          .min(3)
+          .required()
       })}
       onSubmit={async values => {
         props.showLoading();

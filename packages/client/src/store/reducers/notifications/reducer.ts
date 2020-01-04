@@ -33,7 +33,7 @@ const reducer: Reducer<NotificationsState> = (state = initialState, action) => {
         ...state,
         visible: true,
         type: NotificationType.SUCCESS,
-        text: action.payload || "Success!"
+        text: action.payload || "Success"
       };
     }
     case actionTypes.ERROR_NOTIFICATION: {
@@ -41,7 +41,7 @@ const reducer: Reducer<NotificationsState> = (state = initialState, action) => {
         ...state,
         visible: true,
         type: NotificationType.ERROR,
-        text: action.payload || "Error!"
+        text: action.payload || "Error"
       };
     }
     default: {

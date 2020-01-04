@@ -12,38 +12,45 @@ import { REGISTER } from "../../graphql/Register";
 
 const RegisterForm: React.FC<WithNotificationProps> = props => {
   const [registerMutation] = useMutation(REGISTER, {
-    update(_, { data }) {
-      const result = data.register;
-      props.showSuccess(result);
-    },
     onError(err) {
       props.showError(err.graphQLErrors && err.graphQLErrors[0].message);
     }
   });
 
+  const formikInitialValues = {
+    email: "",
+    handle: "",
+    password: "",
+    confirmPassword: ""
+  };
+
   return (
     <Formik
-      initialValues={{
-        email: "",
-        handle: "",
-        password: "",
-        confirmPassword: ""
-      }}
+      initialValues={formikInitialValues}
       validationSchema={Yup.object().shape({
         email: Yup.string()
           .email()
           .required(),
         handle: Yup.string().required(),
-        password: Yup.string().required(),
-        confirmPassword: Yup.string().required()
+        password: Yup.string()
+          .min(3)
+          .required(),
+        confirmPassword: Yup.string()
+          .min(3)
+          .required()
       })}
-      onSubmit={async values => {
+      onSubmit={async (values, { resetForm }) => {
         props.showLoading();
         await registerMutation({
           variables: {
             email: values.email,
             handle: values.handle,
             password: values.password
+          },
+          update(_, { data }) {
+            const result = data.register;
+            props.showSuccess(result);
+            resetForm({ values: formikInitialValues });
           }
         });
       }}

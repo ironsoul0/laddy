@@ -25,25 +25,29 @@ const ProfileForm: React.FC<WithNotificationProps &
     }
   });
 
+  const formikInitialValues = {
+    email: props.email,
+    handle: props.handle,
+    currentPassword: "",
+    password: "",
+    confirmPassword: ""
+  };
+
   return (
     <Formik
-      initialValues={{
-        email: props.email,
-        handle: props.handle,
-        currentPassword: "",
-        password: "",
-        confirmPassword: ""
-      }}
+      initialValues={formikInitialValues}
       validationSchema={Yup.object().shape({
         email: Yup.string()
           .email()
           .required(),
         handle: Yup.string().required(),
-        currentPassword: Yup.string().required(),
-        password: Yup.string(),
-        confirmPassword: Yup.string()
+        currentPassword: Yup.string()
+          .min(3)
+          .required(),
+        password: Yup.string().min(3),
+        confirmPassword: Yup.string().min(3)
       })}
-      onSubmit={async values => {
+      onSubmit={async (values, { resetForm }) => {
         props.showLoading();
         await updateMutation({
           variables: {
@@ -54,6 +58,9 @@ const ProfileForm: React.FC<WithNotificationProps &
           update(cache, { data }) {
             const result = data.updateProfile;
             props.showSuccess(result);
+            resetForm({
+              values: { ...formikInitialValues, handle: values.handle }
+            });
             const cachedData: GetProfileData | null = cache.readQuery({
               query: GET_PROFILE
             });
