@@ -7,7 +7,7 @@ import ProfileForm from "../components/forms/ProfileForm";
 import Spinner from "../components/icons/Spinner";
 import { GET_PROFILE } from "../graphql/GetProfile";
 
-interface GetProfileData {
+export interface GetProfileData {
   profile: {
     email: string;
     handle: string;

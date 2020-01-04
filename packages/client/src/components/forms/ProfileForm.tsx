@@ -9,6 +9,8 @@ import withNotification, {
   WithNotificationProps
 } from "../hocs/withNotification";
 import { UPDATE_PROFILE } from "../../graphql/UpdateProfile";
+import { GET_PROFILE } from "../../graphql/GetProfile";
+import { GetProfileData } from "../../pages/profile";
 
 interface ProfileFormProps {
   email: string;
@@ -18,10 +20,6 @@ interface ProfileFormProps {
 const ProfileForm: React.FC<WithNotificationProps &
   ProfileFormProps> = props => {
   const [updateMutation] = useMutation(UPDATE_PROFILE, {
-    update(_, { data }) {
-      const result = data.updateProfile;
-      props.showSuccess(result);
-    },
     onError(err) {
       props.showError(err.graphQLErrors && err.graphQLErrors[0].message);
     }
@@ -52,6 +50,20 @@ const ProfileForm: React.FC<WithNotificationProps &
             handle: values.handle,
             password: values.currentPassword,
             newPassword: values.confirmPassword
+          },
+          update(cache, { data }) {
+            const result = data.updateProfile;
+            props.showSuccess(result);
+            const cachedData: GetProfileData | null = cache.readQuery({
+              query: GET_PROFILE
+            });
+            if (cachedData) {
+              const profileInfo = cachedData.profile;
+              cache.writeQuery({
+                query: GET_PROFILE,
+                data: { profile: { ...profileInfo, handle: values.handle } }
+              });
+            }
           }
         });
       }}

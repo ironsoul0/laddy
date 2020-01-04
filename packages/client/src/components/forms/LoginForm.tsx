@@ -27,7 +27,7 @@ const LoginForm: React.FC<AllProps> = props => {
       window.location.reload();
     },
     onError(err) {
-      props.showError(err.graphQLErrors[0].message);
+      props.showError(err.graphQLErrors && err.graphQLErrors[0].message);
     }
   });
 
