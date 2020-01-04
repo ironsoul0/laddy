@@ -15,6 +15,7 @@ import { isAuth } from "../middleware/isAuth";
 import { handleValidation, passwordValidation } from "../yup/userSchema";
 import { doesHandleExist } from "../utils/codeforces";
 import { redis } from "../utils/redis";
+import { createAccessToken } from "../utils/auth";
 
 @Resolver()
 export class UserResolver {
@@ -75,22 +76,20 @@ export class UserResolver {
     return "Updated!";
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => String)
   async confirmUser(@Arg("token") token: string) {
     const userID = await redis.get(token);
     if (!userID) {
-      return false;
+      throw new Error("Expired token");
     }
 
     const id = parseInt(userID, 10);
 
-    try {
-      await User.update({ id }, { confirmed: true });
-      await redis.del(token);
-      return true;
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
+    const user = (await User.findOne(id)) as User;
+    user.confirmed = true;
+    await user.save();
+    await redis.del(token);
+
+    return createAccessToken(user);
   }
 }
