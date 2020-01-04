@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Div100vh from "react-div-100vh";
+import { Helmet } from "react-helmet";
 
 import Notification from "../data/Notification";
 import styled from "../../utils/styled";
@@ -15,6 +16,13 @@ interface RootProps {
 const Root: React.FC<RootProps> = ({ children }) => {
   return (
     <Wrapper>
+      <Helmet>
+        <title>Laddy</title>
+        <meta
+          name="description"
+          content="Ladders consisting of Codeforces problems for your rating."
+        />
+      </Helmet>
       <ForkMe />
       <Notification />
       {children}
