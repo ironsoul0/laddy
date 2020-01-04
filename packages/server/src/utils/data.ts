@@ -81,6 +81,10 @@ export const _fillWithMockData = async () => {
   await ladder2.save();
 };
 
+interface ProblemMap {
+  [key: string]: Problem;
+}
+
 const fillWithData = async () => {
   const dbOptions = await getConnectionOptions(
     process.env.NODE_ENV || "development"
@@ -100,7 +104,7 @@ const fillWithData = async () => {
 
   await ironsoul.save();
 
-  const problemMap: any = {};
+  const problemMap: ProblemMap = {};
 
   for (const problems of Object.values(ladders)) {
     for (const problem of problems) {

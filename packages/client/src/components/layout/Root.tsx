@@ -5,6 +5,7 @@ import Div100vh from "react-div-100vh";
 import Notification from "../data/Notification";
 import styled from "../../utils/styled";
 import ForkMe from "../data/ForkMe";
+import mixins from "../../styles/mixins";
 
 interface RootProps {
   className?: string;
@@ -35,4 +36,5 @@ const Wrapper = styled(Div100vh)`
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.body};
   font-family: ${props => props.theme.fonts.body};
+  ${mixins.hideScrollBar};
 `;

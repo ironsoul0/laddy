@@ -13,6 +13,7 @@ import Logo from "../icons/Logo";
 import { ApplicationState } from "../../store/reducers";
 import styled from "../../utils/styled";
 import { logout } from "../../store/reducers/user/actions";
+import mixins from "../../styles/mixins";
 
 interface PropsFromState {
   router: RouterState;
@@ -125,6 +126,7 @@ const Container = styled(Div100vh)`
   margin: 0 auto;
   position: relative;
   overflow-y: scroll;
+  ${mixins.hideScrollBar};
 
   @media screen and (max-width: ${props => props.theme.breakpoints.lg}) {
     padding: 0 30px;

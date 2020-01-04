@@ -11,7 +11,7 @@ import theme from "./styles/theme";
 import store, { history } from "./store";
 
 const client = new ApolloClient({
-  uri: process.env.GRAPHQL_URI || "http://localhost:4000/graphql",
+  uri: process.env.GRAPHQL_URI || "http://192.168.1.102:4000/graphql",
   cache: new InMemoryCache(),
   request: operation => {
     const token = localStorage.getItem("token");

@@ -11,6 +11,16 @@ const mixins = {
       text-decoration: none;
       outline: none;
     }
+  `,
+
+  hideScrollBar: css`
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    & {
+      -ms-overflow-style: none;
+    }
   `
 };
 
