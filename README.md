@@ -8,9 +8,9 @@
 
 <p align="center">Ladders consisting of Codeforces problems for your rating.</p>
 
-> **Important**: The web app is inspired by [A2OJ](https://www.a2oj.com/) which is retired by now. All of the ladders content belong to [Ahmed Aly](https://codeforces.com/profile/ahmed_aly).
-
 ![Screenshot](./assets/screenshot.png)
+
+> **Important**: The web app is inspired by [A2OJ](https://www.a2oj.com/) which is retired by now. All of the ladders content belong to [Ahmed Aly](https://codeforces.com/profile/ahmed_aly).
 
 ### Idea
 
@@ -71,6 +71,7 @@ npm run fill-data
 Laddy is an open source project. Feel free to contribute and suggest any improvements. All bugs and issues should be reported to the [issues](https://github.com/ironsoul0/laddy/issues) tab.
 
 This repository is a monorepo for both client and server parts of the website. Both client and server are written in TypeScript and use safe type-checking. Client uses React and Apollo, while server uses GraphQL and PostgreSQL database.
+
 
 ## Acknowledgements
 
