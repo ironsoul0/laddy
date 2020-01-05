@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="./assets/logo.png" width="180">
+  <a href="http://laddy.app">
+    <img width="180" src="./assets/logo.png">
+  </a>
 </p>
 
-<p align="center">
- <img src="https://img.shields.io/badge/License-MIT-blue.svg">
-</p>
+<h1 align="center">Laddy</h1>
 
 <p align="center">Ladders consisting of Codeforces problems for your rating.</p>
 
