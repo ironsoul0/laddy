@@ -35,7 +35,7 @@ export default Login;
 
 const Body = styled.div`
   overflow-y: scroll;
-  min-height: 100%;
+  height: 100%;
 `;
 
 const Navigation = styled(Nav)`
