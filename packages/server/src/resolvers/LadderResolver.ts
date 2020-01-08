@@ -125,7 +125,7 @@ export class LadderResolver {
     return {
       joined,
       rating: ladder.rating,
-      problems: ladderProblems.reverse()
+      problems: ladderProblems.sort((x, y) => x.difficulty - y.difficulty)
     };
   }
 }
