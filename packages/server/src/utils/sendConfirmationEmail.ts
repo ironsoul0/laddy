@@ -11,29 +11,27 @@ const createConfirmationUrl = async (userID: number) => {
 
 export const sendConfirmationEmail = async (email: string, userID: number) => {
   const url = await createConfirmationUrl(userID);
-  const account = await nodemailer.createTestAccount();
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    host: "smtp.yandex.ru",
+    port: 465,
+    secure: true,
     auth: {
-      user: account.user, // generated ethereal user
-      pass: account.pass // generated ethereal password
+      user: process.env.SMTP_LOGIN,
+      pass: process.env.SMTP_PASS
     }
   });
 
   const mailOptions = {
-    from: "Laddy", // sender address
-    to: email, // list of receivers
-    subject: "Laddy Account Confirmation", // Subject line
-    text: `Hi!\n\nThanks for using Laddy. Follow this link to activate your account.\n\nGood luck!`, // plain text body
-    html: `Hi!<br/><br/>Thanks for using Laddy. Follow this <a href="${url}">link</a> to activate your account.<br/><br/>Good luck!` // html body
+    from: `"${process.env.SMTP_NAME}" <${process.env.SMTP_LOGIN}>`,
+    to: email,
+    subject: "Laddy Account Confirmation",
+    html: `Hi!<br/><br/>Thanks for using Laddy. Follow this <a href="${url}">link</a> to activate your account.<br/><br/>Please note that the link will be valid for only 24 hours.`
   };
 
-  const info = await transporter.sendMail(mailOptions);
-
-  console.log("Message sent: %s", info.messageId);
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (err) {
+    console.log(err);
+  }
 };
