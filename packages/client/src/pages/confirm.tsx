@@ -35,7 +35,7 @@ const Confirm: React.FC<AllProps> = props => {
     });
   });
 
-  return loading ? null : <Redirect to="/" />;
+  return loading ? null : <Redirect to="/login" />;
 };
 
 export default withNotification(withRouter(Confirm));
