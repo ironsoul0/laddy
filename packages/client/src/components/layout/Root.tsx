@@ -22,7 +22,6 @@ const Root: React.FC<RootProps> = ({ children }) => {
           name="description"
           content="Ladders consisting of Codeforces problems for your rating."
         />
-        <meta name="yandex-verification" content="4242611b87d2b347" />
       </Helmet>
       <ForkMe />
       <Notification />
