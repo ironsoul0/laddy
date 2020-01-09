@@ -56,7 +56,6 @@ const Main: React.FC<PropsFromState> = props => {
   const handleLogout = () => {
     props.logout();
     localStorage.removeItem("token");
-    window.location.reload();
   };
 
   return (

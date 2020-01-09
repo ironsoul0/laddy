@@ -14,6 +14,7 @@ import Ladders from "./pages/ladders";
 import Profile from "./pages/profile";
 import Login from "./pages/login";
 import Confirm from "./pages/confirm";
+import Landing from "./pages/landing";
 
 import { ApplicationState } from "./store/reducers";
 import { UserState } from "./store/reducers/user/types";
@@ -41,7 +42,8 @@ const Routes: React.FC<RoutesProps> = ({ user }) => (
       </Main>
     ) : (
       <Switch>
-        <Route exact path="/" component={Login} />
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/confirm/:token" component={Confirm} />
         <Redirect to="/" />
       </Switch>
