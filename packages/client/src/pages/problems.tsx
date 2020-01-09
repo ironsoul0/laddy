@@ -60,7 +60,7 @@ const Problems: React.FC<AllProps> = props => {
     TOGGLE_LADDER,
     {
       update(cache, { data }) {
-        props.showSuccess(data.toggleLadder ? "Joined" : "Leaved");
+        props.showSuccess(data.toggleLadder ? "Joined" : "Left");
 
         try {
           const cachedData: LaddersInfoData | null = cache.readQuery({
