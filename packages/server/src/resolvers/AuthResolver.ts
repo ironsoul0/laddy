@@ -18,7 +18,7 @@ export class AuthResolver {
       throw err;
     }
 
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email: email.toLowerCase() } });
     if (!user) {
       throw new Error("Could not find user");
     }
@@ -29,6 +29,7 @@ export class AuthResolver {
     }
 
     if (!user.confirmed) {
+      await sendConfirmationEmail(user.email, user.id);
       throw new Error("Not confirmed");
     }
 
@@ -49,31 +50,38 @@ export class AuthResolver {
       throw err;
     }
 
-    const userAlreadyExists = await User.findOne({ where: { email } });
-    if (userAlreadyExists) {
-      const { id, confirmed } = userAlreadyExists;
-
-      if (!confirmed) {
-        await sendConfirmationEmail(email, id);
-        return "Check your email";
-      }
-
-      throw new Error("User already exists");
-    }
-
     const validHandle = await doesHandleExist(handle);
     if (!validHandle) {
       throw new Error("Invalid handle");
     }
 
     const hashedPassword = await hash(password, 12);
+    const loweredEmail = email.toLowerCase();
+
+    const userAlreadyExists = await User.findOne({
+      where: { email: loweredEmail }
+    });
+    if (userAlreadyExists) {
+      const { id, confirmed } = userAlreadyExists;
+
+      if (!confirmed) {
+        userAlreadyExists.password = hashedPassword;
+        userAlreadyExists.handle = handle;
+        await userAlreadyExists.save();
+        await sendConfirmationEmail(loweredEmail, id);
+        return "Check your email";
+      }
+
+      throw new Error("User already exists");
+    }
+
     try {
       const user = await User.create({
-        email,
+        email: loweredEmail,
         password: hashedPassword,
         handle
       }).save();
-      await sendConfirmationEmail(email, user.id);
+      await sendConfirmationEmail(loweredEmail, user.id);
     } catch (err) {
       console.log(err);
       throw new Error("Error occured");
