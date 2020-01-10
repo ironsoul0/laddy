@@ -34,7 +34,7 @@ Clean design with the focus on details.
 
 ### Filling environmental variables
 
-In order to work on Laddy locally, you must assign values to some env. variables both in the [client](https://github.com/ironsoul0/laddy/tree/master/packages/client) and [server](https://github.com/ironsoul0/laddy/tree/master/packages/server) folders.
+In order to work on Laddy locally, you must assign values to some env. variables both in the [client](https://github.com/ironsoul0/laddy/tree/master/packages/client) and [server](https://github.com/ironsoul0/laddy/tree/master/packages/server) folders. This could be done by creating and filling `.env` files.
 
 - Client:
   - **REACT_APP_GRAPHQL_URI**: URL for the GraphQL server. (`http://localhost:4000/graphql` by default)
@@ -42,6 +42,7 @@ In order to work on Laddy locally, you must assign values to some env. variables
 - Server:
   - **ACCESS_TOKEN_SECRET**: Secret used for signing JWT tokens on the backend.
   - **APP_URL**: Your app base URL. (`http://localhost:3000` by default)
+  - **SMTP_LOGIN**, **SMTP_PASS**, **SMTP_NAME**: Settings for email delivery service. Laddy uses Yandex Mail for this purpose.
 
 ### Install
 
