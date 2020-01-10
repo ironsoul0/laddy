@@ -87,6 +87,7 @@ const Button = styled.a`
   color: white;
   border: none;
   padding: 10px 20px;
+  border-radius: 5px;
   background: ${props => props.theme.colors.yellow};
   ${mixins.dropDecoration};
 
@@ -98,9 +99,9 @@ const Button = styled.a`
 const GithubLink = styled.a`
   color: ${props => props.theme.colors.yellow};
   font-size: 18px;
-  ${mixins.dropDecoration};
   margin-right: 25px;
 
+  ${mixins.dropDecoration};
   &:hover {
     opacity: 0.9;
   }
