@@ -2,6 +2,7 @@ import React from "react";
 import Div100vh from "react-div-100vh";
 import { connect } from "react-redux";
 import { RouterState } from "connected-react-router";
+import Helmet from "react-helmet";
 
 import Notification from "../data/Notification";
 import styled from "../../utils/styled";
@@ -22,6 +23,15 @@ const Root: React.FC<RootProps & PropsFromState> = ({ children, router }) => {
 
   return (
     <Wrapper>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Laddy</title>
+        <link rel="canonical" href="https://laddy.app" />
+        <meta
+          name="description"
+          content="Ladders consisting of Codeforces problems for your rating."
+        />
+      </Helmet>
       {!isMainPage && <ForkMe />}
       <Notification />
       {children}
