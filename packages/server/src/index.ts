@@ -30,7 +30,7 @@ const bootstrap = async () => {
   apolloServer.applyMiddleware({ app });
 
   const buildPath = path.resolve(__dirname, "../../client/build");
-  app.use(express.static(buildPath));
+  app.use(express.static(buildPath) as express.Handler);
 
   app.use("*", (_, res) => {
     res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
