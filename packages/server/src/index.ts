@@ -36,8 +36,8 @@ const bootstrap = async () => {
     res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
   });
 
-  const PORT = process.env.PORT || 4000;
-  app.listen(PORT, () => {
+  const PORT = (process.env.PORT || 4000) as number;
+  app.listen(PORT, "127.0.0.1", () => {
     console.log(`🚀 Server is started on port ${PORT}`);
   });
 };
