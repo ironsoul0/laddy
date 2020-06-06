@@ -18,7 +18,7 @@
     "typescript": "3.7.2"
   },
   "dependencies": {
-    "apollo-server-express": "^2.9.9",
+    "apollo-server-express": "^2.14.2",
     "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "connect-sqlite3": "^0.9.11",
