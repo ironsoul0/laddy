@@ -4,7 +4,6 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { createConnection, getConnectionOptions } from "typeorm";
-import cors from "cors";
 import path from "path";
 
 import { UserResolver } from "./resolvers/UserResolver";
@@ -13,8 +12,6 @@ import { LadderResolver } from "./resolvers/LadderResolver";
 
 const bootstrap = async () => {
   const app = express();
-
-  app.use(cors());
 
   const dbOptions = await getConnectionOptions(
     process.env.NODE_ENV || "development"
@@ -36,8 +33,8 @@ const bootstrap = async () => {
     res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
   });
 
-  const PORT = process.env.PORT || 4000;
-  app.listen(PORT, () => {
+  const PORT = (process.env.PORT || 4000) as number;
+  app.listen(PORT, "127.0.0.1", () => {
     console.log(`🚀 Server is started on port ${PORT}`);
   });
 };
