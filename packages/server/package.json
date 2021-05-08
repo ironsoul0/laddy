@@ -33,7 +33,7 @@
     "reflect-metadata": "^0.1.10",
     "sqlite3": "^4.1.0",
     "type-graphql": "^0.17.5",
-    "typeorm": "0.2.20",
+    "typeorm": "0.2.25",
     "uuid": "^3.3.3",
     "yup": "^0.28.0"
   },
