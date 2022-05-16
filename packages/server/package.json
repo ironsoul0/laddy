@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "apollo-server-express": "^2.9.9",
-    "axios": "^0.19.0",
+    "axios": "^0.21.2",
     "bcryptjs": "^2.4.3",
     "connect-sqlite3": "^0.9.11",
     "cookie-parser": "^1.4.4",
