@@ -23,7 +23,7 @@
     "bcryptjs": "^2.4.3",
     "connect-sqlite3": "^0.9.11",
     "cookie-parser": "^1.4.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.17.0",
     "graphql": "^14.5.8",
     "ioredis": "^4.14.1",
